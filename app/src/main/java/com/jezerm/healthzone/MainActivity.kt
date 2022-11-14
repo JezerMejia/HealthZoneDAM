@@ -12,6 +12,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.jezerm.healthzone.databinding.ActivityMainBinding
+import com.jezerm.healthzone.ui.patient.AccountActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -76,6 +77,12 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setupWithNavController(navController)
     }
 
+    private fun openAccountView(): Boolean {
+        val intent = Intent(this, AccountActivity::class.java)
+        startActivity(intent)
+        return true
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -88,7 +95,7 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_settings -> true
-            R.id.action_account -> true
+            R.id.action_account -> openAccountView()
             else -> super.onOptionsItemSelected(item)
         }
     }
