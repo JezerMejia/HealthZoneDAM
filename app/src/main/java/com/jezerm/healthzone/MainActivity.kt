@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     private var doctor_mode = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        WindowCompat.setDecorFitsSystemWindows(window, true)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
 
         logged_in = intent.getBooleanExtra("logged_in", false)
