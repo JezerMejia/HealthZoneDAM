@@ -16,13 +16,28 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             style="?attr/collapsingToolbarLayoutLargeStyle"
             android:layout_width="match_parent"
-            android:layout_height="?attr/collapsingToolbarLayoutLargeSize"
+            android:layout_height="260dp"
+            app:titleCollapseMode="scale"
+            app:expandedTitleTextColor="#fff"
+            app:contentScrim="?attr/colorSecondaryContainer"
+            app:expandedTitleGravity="bottom|center_horizontal"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/martha_dominguez_de_gouveia_nmym7fxpoke_unsplash"
+                android:scaleType="centerCrop"
+                android:fitsSystemWindows="true"
+                app:brightness="0.6"
+                app:layout_collapseMode="none"
+                />
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                tools:title="UwU"
                 app:layout_collapseMode="pin" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
