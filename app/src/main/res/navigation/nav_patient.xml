@@ -10,4 +10,9 @@
         android:name="com.jezerm.healthzone.ui.patient.HomeFragment"
         android:label="@string/action_home"
         tools:layout="@layout/fragment_home_patient" />
+    <fragment
+        android:id="@+id/navigation_appointments"
+        android:name="com.jezerm.healthzone.ui.patient.AppointmentsFragment"
+        android:label="@string/action_appointments"
+        tools:layout="@layout/fragment_appointments_patient" />
 </navigation>
