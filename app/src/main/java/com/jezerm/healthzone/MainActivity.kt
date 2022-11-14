@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, true)
         super.onCreate(savedInstanceState)
 
-        if (logged_in) {
+        if (!logged_in) {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             return
