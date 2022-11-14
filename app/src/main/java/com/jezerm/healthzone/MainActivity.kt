@@ -2,14 +2,14 @@ package com.jezerm.healthzone
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
 import androidx.navigation.ui.setupWithNavController
 import com.jezerm.healthzone.databinding.ActivityMainBinding
 
@@ -29,7 +29,8 @@ class MainActivity : AppCompatActivity() {
 
         if (!logged_in) {
             val intent = Intent(this, LoginActivity::class.java).apply {
-                this.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NO_HISTORY
+                this.flags =
+                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NO_HISTORY
             }
             startActivity(intent)
             return
@@ -51,20 +52,25 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         navController.setGraph(R.navigation.nav_patient)
 
-        appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.navigation_home,
-            R.id.navigation_appointments,
-        ))
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_home,
+                R.id.navigation_appointments,
+            )
+        )
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.bottomNavigation.setupWithNavController(navController)
     }
+
     private fun setupDoctorView() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         navController.setGraph(R.navigation.nav_doctor)
 
-        appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.navigation_home,
-        ))
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_home,
+            )
+        )
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.bottomNavigation.setupWithNavController(navController)
     }
