@@ -56,6 +56,7 @@ class MainActivity : AppCompatActivity() {
             setOf(
                 R.id.navigation_home,
                 R.id.navigation_appointments,
+                R.id.navigation_maps,
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

@@ -15,4 +15,9 @@
         android:name="com.jezerm.healthzone.ui.patient.AppointmentsFragment"
         android:label="@string/action_appointments"
         tools:layout="@layout/fragment_appointments_patient" />
+    <fragment
+        android:id="@+id/navigation_maps"
+        android:name="com.jezerm.healthzone.ui.patient.MapsFragment"
+        android:label="@string/action_map"
+        tools:layout="@layout/fragment_maps_patient" />
 </navigation>
