@@ -17,15 +17,20 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-    private val logged_in = false
-    private val doctorMode = true
+    private var logged_in = false
+    private var doctor_mode = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, true)
         super.onCreate(savedInstanceState)
 
+        logged_in = intent.getBooleanExtra("logged_in", false)
+        doctor_mode = intent.getBooleanExtra("doctor_mode", false)
+
         if (!logged_in) {
-            val intent = Intent(this, LoginActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java).apply {
+                this.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NO_HISTORY
+            }
             startActivity(intent)
             return
         }
@@ -35,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
-        if (doctorMode) {
+        if (doctor_mode) {
             setupDoctorView()
         } else {
             setupPatientView()
