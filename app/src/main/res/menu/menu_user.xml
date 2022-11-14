@@ -9,6 +9,10 @@
         android:icon="@drawable/ic_round_meeting_room_24"
         android:title="@string/action_appointments" />
     <item
+        android:id="@+id/navigation_map"
+        android:icon="@drawable/ic_round_map_24"
+        android:title="@string/action_map" />
+    <item
         android:id="@+id/action_settings"
         android:icon="@drawable/ic_round_settings_24"
         android:title="@string/action_settings" />

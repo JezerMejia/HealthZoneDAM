@@ -2,6 +2,7 @@
     <string name="app_name">HealthZone</string>
     <string name="action_home">Inicio</string>
     <string name="action_settings">Ajustes</string>
+    <string name="action_map">Mapa</string>
     <string name="action_appointments">Citas</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
