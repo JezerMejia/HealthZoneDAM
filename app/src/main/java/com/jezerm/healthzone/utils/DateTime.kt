@@ -1,18 +1,16 @@
 package com.jezerm.healthzone.utils
 
-import android.content.Context
+import android.icu.text.DisplayContext
+import android.icu.text.NumberFormat
 import android.icu.text.RelativeDateTimeFormatter
-import android.text.format.DateUtils
+import android.icu.text.RelativeDateTimeFormatter.*
+import android.icu.util.ULocale
 import com.jezerm.healthzone.MainActivity
-import java.time.DayOfWeek
-import java.time.Instant
-import java.time.LocalDateTime
-import java.time.MonthDay
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
-import java.time.temporal.ChronoField
 import java.time.temporal.ChronoUnit
+import java.util.*
 
 class DateTime {
     companion object {
@@ -29,19 +27,56 @@ class DateTime {
             return ZonedDateTime.parse(text, formatter)
         }
 
-        fun format(year: Int, month: Int, day: Int, hour: Int, minute: Int, zoneId: ZoneId): ZonedDateTime {
+        fun format(
+            year: Int,
+            month: Int,
+            day: Int,
+            hour: Int,
+            minute: Int,
+            zoneId: ZoneId
+        ): ZonedDateTime {
             return ZonedDateTime.of(year, month, day, hour, minute, 0, 0, zoneId)
         }
 
-        fun toString(dateTime: ZonedDateTime) {
+        fun toString(dateTime: ZonedDateTime): String {
             val now = ZonedDateTime.now()
             val localDateTime = dateTime.withZoneSameInstant(ZoneId.systemDefault())
-
-            val elapsed = localDateTime.toEpochSecond() * 1000 + now.get(ChronoField.MILLI_OF_SECOND)
+            val relativeFormatter = RelativeDateTimeFormatter.getInstance(
+                ULocale.getDefault(),
+                NumberFormat.getInstance(),
+                Style.SHORT,
+                DisplayContext.CAPITALIZATION_FOR_BEGINNING_OF_SENTENCE
+            )
 
             val c = MainActivity.appContext
-            val formatted = DateUtils.getRelativeDateTimeString(c, elapsed, DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0)
-            println("FORMATTED: $formatted")
+
+            val days = now.until(localDateTime, ChronoUnit.DAYS)
+            val hours = now.until(localDateTime, ChronoUnit.HOURS) - days * 24
+            val minutes = now.until(localDateTime, ChronoUnit.MINUTES) - (days * 24 + hours) * 60
+
+            if (days > 1) {
+                return formatter.format(localDateTime)
+            } else if (days > 0) {
+                return relativeFormatter.format(Direction.NEXT, AbsoluteUnit.DAY)
+            } else if (days < 0) {
+                return formatter.format(localDateTime)
+            }
+
+            if (hours > 1) {
+                return relativeFormatter.format(
+                    hours.toDouble(),
+                    Direction.NEXT,
+                    RelativeUnit.HOURS
+                )
+            }
+            if (minutes > 1) {
+                return relativeFormatter.format(
+                    minutes.toDouble(),
+                    Direction.NEXT,
+                    RelativeUnit.MINUTES
+                )
+            }
+            return relativeFormatter.format(Direction.PLAIN, AbsoluteUnit.NOW)
         }
     }
 }
