@@ -11,13 +11,22 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.jezerm.healthzone.data.AppDatabase
+import com.jezerm.healthzone.data.AppointmentDAO
+import com.jezerm.healthzone.data.UserDAO
+import com.jezerm.healthzone.data.HospitalDAO
 import com.jezerm.healthzone.databinding.ActivityMainBinding
 import com.jezerm.healthzone.ui.patient.AccountActivity
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private lateinit var userDao: UserDAO
+    private lateinit var appointmentDao: AppointmentDAO
+    private lateinit var hospitalDao: HospitalDAO
     private var logged_in = false
     private var doctor_mode = true
 
@@ -47,6 +56,26 @@ class MainActivity : AppCompatActivity() {
         } else {
             setupPatientView()
         }
+
+
+        val db = AppDatabase.getInstance(applicationContext)
+        userDao = db.userDao()
+        appointmentDao = db.appointmentDao()
+        hospitalDao = db.hospitalDao()
+        runBlocking {
+            launch {
+                val users = userDao.getAll()
+                val appointments = appointmentDao.getAll()
+                val hospitals = hospitalDao.getAll()
+
+                if(users.isEmpty()) {
+                    userDao.insertTestPatient()
+                    userDao.insertTestDoctor()
+                    appointmentDao.insertTestAppointment()
+                    hospitalDao.insertTestHospital()
+                }
+            }
+        }
     }
 
     private fun setupPatientView() {
@@ -71,6 +100,8 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_home,
+                R.id.navigation_appointments,
+                R.id.navigation_maps,
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
