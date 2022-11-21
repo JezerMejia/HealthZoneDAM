@@ -14,10 +14,10 @@ class User (
     @ColumnInfo(name = "middle_name") val middleName: String? = null,
     @ColumnInfo(name = "last_name") val lastName: String,
     @ColumnInfo(name = "telephone") val telephone: String? = null,
-    @ColumnInfo(name = "is_doctor") val isDoctor: Boolean,
+    @ColumnInfo(name = "is_doctor") val isDoctor: Boolean = true,
 
     // Doctor only
-    @ColumnInfo(name = "hospital_id") val hospital: Int? = null,
+    @ColumnInfo(name = "hospital_id") val hospitalId: Int? = null,
     @ColumnInfo(name = "specialty") val specialty: String? = null,
 
     // Patient only
@@ -27,4 +27,8 @@ class User (
     @ColumnInfo(name = "sex") val sex: Boolean? = null,
     @ColumnInfo(name = "conditions") val conditions: String? = null,
 
-    )
+    ) {
+    override fun toString(): String {
+        return "ID: $id, Name: $firstName $lastName, isDoctor: ${isDoctor.toString()}"
+    }
+}

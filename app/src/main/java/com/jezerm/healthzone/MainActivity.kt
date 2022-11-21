@@ -24,9 +24,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-    private lateinit var userDao: UserDAO
-    private lateinit var appointmentDao: AppointmentDAO
-    private lateinit var hospitalDao: HospitalDAO
     private var logged_in = false
     private var doctor_mode = true
 
@@ -57,25 +54,6 @@ class MainActivity : AppCompatActivity() {
             setupPatientView()
         }
 
-
-        val db = AppDatabase.getInstance(applicationContext)
-        userDao = db.userDao()
-        appointmentDao = db.appointmentDao()
-        hospitalDao = db.hospitalDao()
-        runBlocking {
-            launch {
-                val users = userDao.getAll()
-                val appointments = appointmentDao.getAll()
-                val hospitals = hospitalDao.getAll()
-
-                if(users.isEmpty()) {
-                    userDao.insertTestPatient()
-                    userDao.insertTestDoctor()
-                    appointmentDao.insertTestAppointment()
-                    hospitalDao.insertTestHospital()
-                }
-            }
-        }
     }
 
     private fun setupPatientView() {

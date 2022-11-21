@@ -22,12 +22,12 @@ interface UserDAO {
 
     @Query("INSERT INTO User " +
             "(username, password, first_name, middle_name, last_name, telephone, is_doctor, age, weight, height, sex, conditions) VALUES" +
-            "('ameza', '123', 'armando', 'alexander', 'meza', '77664604', 'false', 21, 115, 164, 'true', 'Diarrea')")
+            "('ameza', '123', 'armando', 'alexander', 'meza', '77664604', 0, 21, 115, 164, 1, 'Diarrhea')")
     suspend fun insertTestPatient()
 
     @Query("INSERT INTO User " +
             "(username, password, first_name, middle_name, last_name, telephone, is_doctor, hospital_id, specialty) VALUES" +
-            "('doctor', '123', 'jose', 'manuel', 'garcia', '88887777', 'true', 1, 'cancer')")
+            "('doctor', '123', 'jose', 'manuel', 'garcia', '88887777', 1, 1, 'cancer')")
     suspend fun insertTestDoctor()
 
     @Insert
@@ -39,6 +39,6 @@ interface UserDAO {
     @Query("DELETE FROM User WHERE id =:id")
     suspend fun delete(id:Int)
 
-    @Query("SELECT * FROM User WHERE username = :username AND password = :password")
-    suspend fun getById(username: String, password: String): List<User>
+    @Query("SELECT * FROM User WHERE username = :username AND password = :password LIMIT 1")
+    suspend fun login(username: String, password: String): List<User>
 }

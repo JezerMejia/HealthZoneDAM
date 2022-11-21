@@ -12,7 +12,7 @@ interface HospitalDAO {
     suspend fun getAll(): List<Hospital>
 
     @Query("INSERT INTO Hospital" +
-            "(name, address, telephone, email, hours) VALUES" +
-            "('Hospital1', 'asdf', '88889999', 'a@a.com', '1111111')")
+            "(name, address, telephone, email, hours, latitude, longitude) VALUES" +
+            "('Hospital1', 'asdf', '88889999', 'a@a.com', '1111111', 12.1254835, -86.2708279)")
     suspend fun insertTestHospital()
 }
