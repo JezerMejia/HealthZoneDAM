@@ -1,5 +1,6 @@
 package com.jezerm.healthzone
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -22,6 +23,8 @@ class MainActivity : AppCompatActivity() {
     private var doctor_mode = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        appContext = applicationContext
+
         WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
 
@@ -104,5 +107,9 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
+    }
+
+    companion object {
+        lateinit var appContext: Context
     }
 }
