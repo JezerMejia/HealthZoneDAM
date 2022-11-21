@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.jezerm.healthzone.databinding.PatientAppointmentItemBinding
 import com.jezerm.healthzone.entities.Appointment
+import com.jezerm.healthzone.utils.DateTime
 
 class AppointmentAdapter(
     var list: ArrayList<Appointment>,
@@ -15,7 +16,7 @@ class AppointmentAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun load(appointment: Appointment) {
-            binding.tvDate.text = appointment.date.toString()
+            binding.tvDate.text = DateTime.toString(appointment.date)
 
             binding.cardContainer.setOnClickListener {
                 clickListener(appointment)

@@ -39,7 +39,7 @@ class AppointmentsFragment : Fragment() {
 
         val appointmentList = arrayListOf<Appointment>(
             Appointment(
-                DateTime.format("2022-11-22 13:00 America/Managua"),
+                DateTime.format("2022-11-21 13:00 America/Managua"),
                 "Armando"
             ),
             Appointment(
@@ -47,10 +47,6 @@ class AppointmentsFragment : Fragment() {
                 "Juan"
             ),
         )
-
-        val d = DateTime.format(2022, 11, 22, 16, 0, ZoneId.systemDefault())
-        println(d)
-        DateTime.toString(d)
 
         binding.rcvAppointmentList.layoutManager = LinearLayoutManager(requireContext())
         binding.rcvAppointmentList.adapter = AppointmentAdapter(appointmentList) {
