@@ -7,9 +7,10 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ui.patient.AppointmentsFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvAppointmentList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:text="@string/lorem_ipsum" />
+        tools:listitem="@layout/patient_appointment_item"
+        />
 </androidx.core.widget.NestedScrollView>
