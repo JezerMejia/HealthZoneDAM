@@ -43,6 +43,10 @@ class AppointmentsFragment : Fragment() {
                 "Armando"
             ),
             Appointment(
+                DateTime.format("2022-11-22 13:00 America/Managua"),
+                "Armando"
+            ),
+            Appointment(
                 DateTime.format("2022-05-25 13:00 -06:00"),
                 "Juan"
             ),
