@@ -20,4 +20,9 @@
         android:name="com.jezerm.healthzone.ui.patient.MapsFragment"
         android:label="@string/action_map"
         tools:layout="@layout/fragment_maps_patient" />
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.jezerm.healthzone.ui.patient.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>
