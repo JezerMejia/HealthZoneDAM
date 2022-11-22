@@ -10,12 +10,6 @@ import com.jezerm.healthzone.databinding.FragmentAppointmentsPatientBinding
 import com.jezerm.healthzone.entities.Appointment
 import com.jezerm.healthzone.ui.patient.appointment.AppointmentAdapter
 import com.jezerm.healthzone.utils.DateTime
-import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.ZoneId
-import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
-import java.util.*
 
 class AppointmentsFragment : Fragment() {
     private lateinit var binding: FragmentAppointmentsPatientBinding
@@ -39,20 +33,32 @@ class AppointmentsFragment : Fragment() {
 
         val appointmentList = arrayListOf<Appointment>(
             Appointment(
+                1,
                 DateTime.now().plusHours(1),
-                "Armando"
+                "Armando",
+                0,
+                0
             ),
             Appointment(
+                2,
                 DateTime.now().plusMinutes(2),
-                "Armando"
+                "Armando",
+                0,
+                0
             ),
             Appointment(
+                3,
                 DateTime.format("2022-11-22 13:00 America/Managua"),
-                "Armando"
+                "Armando",
+                0,
+                0
             ),
             Appointment(
+                4,
                 DateTime.format("2022-05-25 13:00 -06:00"),
-                "Juan"
+                "Juan",
+                0,
+                0,
             ),
         )
 
