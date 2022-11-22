@@ -12,7 +12,7 @@ interface AppointmentDAO {
     suspend fun getAll(): List<Appointment>
 
     @Query("INSERT INTO Appointment" +
-            "(date, doctor_id, patient_id, description) VALUES" +
-            "('2022-11-25', 2, 1, 'aaaaaa')")
+            "(date, description, doctor_id, patient_id) VALUES" +
+            "('2022-11-25 19:00 America/Managua', 'aaaaaa', 2, 1)")
     suspend fun insertTestAppointment()
 }
