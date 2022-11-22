@@ -5,20 +5,19 @@ import android.icu.text.NumberFormat
 import android.icu.text.RelativeDateTimeFormatter
 import android.icu.text.RelativeDateTimeFormatter.*
 import android.icu.util.ULocale
+import androidx.room.TypeConverter
 import com.jezerm.healthzone.MainActivity
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
-import java.util.*
 import kotlin.math.abs
-import kotlin.math.min
 
 class DateTime {
     companion object {
         private val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm VV")
 
-        fun now() : ZonedDateTime{
+        fun now(): ZonedDateTime {
             return ZonedDateTime.now()
         }
 
@@ -95,6 +94,22 @@ class DateTime {
                 )
             }
             return relativeFormatter.format(Direction.PLAIN, AbsoluteUnit.NOW)
+        }
+
+        @TypeConverter
+        @JvmStatic
+        fun fromDatetime(value: ZonedDateTime): String {
+            return value.toString()
+        }
+
+        @TypeConverter
+        @JvmStatic
+        fun toDatetime(value: String): ZonedDateTime {
+            return try {
+                format(value)
+            } catch (e: Exception) {
+                ZonedDateTime.now()
+            }
         }
     }
 }
