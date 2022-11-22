@@ -58,7 +58,7 @@ class LoginActivity : AppCompatActivity() {
                         return@launch
                     intent.putExtra("logged_in", true)
                     intent.putExtra("doctor_mode", user[0].isDoctor)
-                    Toast.makeText(applicationContext, user[0].toString(), Toast.LENGTH_SHORT).show()
+                    intent.putExtra("user", user[0])
                     startActivity(intent)
                 }
             }
