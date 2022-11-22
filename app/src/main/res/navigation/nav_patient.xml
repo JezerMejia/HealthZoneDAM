@@ -35,4 +35,9 @@
             android:name="appointment"
             app:argType="com.jezerm.healthzone.entities.Appointment" />
     </fragment>
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.jezerm.healthzone.ui.patient.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>
