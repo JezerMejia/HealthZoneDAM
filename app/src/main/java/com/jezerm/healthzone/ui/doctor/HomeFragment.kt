@@ -1,13 +1,17 @@
 package com.jezerm.healthzone.ui.doctor
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jezerm.healthzone.MainActivity
 import com.jezerm.healthzone.R
+import com.jezerm.healthzone.ShowPatientFragment
 import com.jezerm.healthzone.data.AppDatabase
 import com.jezerm.healthzone.databinding.FragmentHomeDoctorBinding
 import com.jezerm.healthzone.entities.User
@@ -39,7 +43,10 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = FragmentHomeDoctorBinding.inflate(inflater, container, false)
         binding.rcvPacientes.layoutManager = LinearLayoutManager(requireContext())
-        binding.rcvPacientes.adapter = PatientAdapter(patients)
+        binding.rcvPacientes.adapter = PatientAdapter(patients) { selectedPatient, i ->
+            ShowPatientFragment.newInstance(selectedPatient)
+            findNavController().navigate(R.id.action_navigation_home_to_showPatientFragment)
+        }
         return binding.root
     }
 }

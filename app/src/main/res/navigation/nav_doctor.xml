@@ -9,5 +9,14 @@
         android:id="@+id/navigation_home"
         android:name="com.jezerm.healthzone.ui.doctor.HomeFragment"
         android:label="@string/action_home"
-        tools:layout="@layout/fragment_home_doctor" />
+        tools:layout="@layout/fragment_home_doctor" >
+        <action
+            android:id="@+id/action_navigation_home_to_showPatientFragment"
+            app:destination="@id/showPatientFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/showPatientFragment"
+        android:name="com.jezerm.healthzone.ShowPatientFragment"
+        android:label="fragment_show_patient"
+        tools:layout="@layout/fragment_show_patient" />
 </navigation>
