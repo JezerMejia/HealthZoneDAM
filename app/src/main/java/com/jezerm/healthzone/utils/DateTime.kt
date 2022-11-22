@@ -53,8 +53,6 @@ class DateTime {
                 DisplayContext.CAPITALIZATION_FOR_BEGINNING_OF_SENTENCE
             )
 
-            val c = MainActivity.appContext
-
             val days = now.until(localDateTime, ChronoUnit.DAYS)
             val hours = now.until(localDateTime, ChronoUnit.HOURS) - days * 24
             val minutes = now.until(localDateTime, ChronoUnit.MINUTES) - (days * 24 + hours) * 60
