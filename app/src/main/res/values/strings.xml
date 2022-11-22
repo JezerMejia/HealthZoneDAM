@@ -62,8 +62,9 @@
     <!--Settings-->
     <string name="settings">Test</string>
     <string-array name="options">
-        <item>Por defecto</item>
         <item>Oscuro</item>
+        <item>Claro</item>
+        <item>Automatico</item>
     </string-array>
 
 </resources>
