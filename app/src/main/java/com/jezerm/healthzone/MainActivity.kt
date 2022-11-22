@@ -12,8 +12,14 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.jezerm.healthzone.data.AppDatabase
+import com.jezerm.healthzone.data.AppointmentDAO
+import com.jezerm.healthzone.data.UserDAO
+import com.jezerm.healthzone.data.HospitalDAO
 import com.jezerm.healthzone.databinding.ActivityMainBinding
 import com.jezerm.healthzone.ui.patient.AccountActivity
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class MainActivity : AppCompatActivity() {
 
@@ -50,6 +56,7 @@ class MainActivity : AppCompatActivity() {
         } else {
             setupPatientView()
         }
+
     }
 
     private fun setupPatientView() {
@@ -74,6 +81,8 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_home,
+                R.id.navigation_appointments,
+                R.id.navigation_maps,
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
