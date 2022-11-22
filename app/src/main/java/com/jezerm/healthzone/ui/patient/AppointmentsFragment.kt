@@ -39,7 +39,11 @@ class AppointmentsFragment : Fragment() {
 
         val appointmentList = arrayListOf<Appointment>(
             Appointment(
-                DateTime.format("2022-11-21 13:00 America/Managua"),
+                DateTime.now().plusHours(1),
+                "Armando"
+            ),
+            Appointment(
+                DateTime.now().plusMinutes(2),
                 "Armando"
             ),
             Appointment(
