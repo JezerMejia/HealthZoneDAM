@@ -38,6 +38,8 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeDoctorBinding.inflate(inflater, container, false)
+        binding.rcvPacientes.layoutManager = LinearLayoutManager(requireContext())
+        binding.rcvPacientes.adapter = PatientAdapter(patients)
         return binding.root
     }
 }
