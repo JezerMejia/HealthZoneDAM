@@ -10,12 +10,14 @@ import com.jezerm.healthzone.MainActivity
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 import java.time.temporal.ChronoUnit
 import kotlin.math.abs
 
 class DateTime {
     companion object {
         private val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm VV")
+        private val prettyFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG, FormatStyle.SHORT)
 
         fun now(): ZonedDateTime {
             return ZonedDateTime.now()
@@ -94,6 +96,11 @@ class DateTime {
                 )
             }
             return relativeFormatter.format(Direction.PLAIN, AbsoluteUnit.NOW)
+        }
+
+        fun toPrettierString(dateTime: ZonedDateTime): String {
+            val localDateTime = dateTime.withZoneSameInstant(ZoneId.systemDefault())
+            return prettyFormatter.format(localDateTime)
         }
 
         @TypeConverter

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.jezerm.healthzone.databinding.FragmentAppointmentDetailsBinding
 import com.jezerm.healthzone.entities.Appointment
+import com.jezerm.healthzone.utils.DateTime
 
 class AppointmentDetailsFragment : Fragment() {
     private lateinit var binding: FragmentAppointmentDetailsBinding
@@ -32,7 +33,7 @@ class AppointmentDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.tvDate.text = appointment.date.toString()
+        binding.tvDate.text = DateTime.toPrettierString(appointment.date)
         binding.tvDoctorName.text = appointment.doctorId.toString()
         binding.tvDescription.text = appointment.description
     }
