@@ -10,7 +10,6 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jezerm.healthzone.MainActivity
 import com.jezerm.healthzone.R
-import com.jezerm.healthzone.ShowPatientFragment
 import com.jezerm.healthzone.data.AppDatabase
 import com.jezerm.healthzone.databinding.FragmentHomeDoctorBinding
 import com.jezerm.healthzone.entities.User
