@@ -11,10 +11,16 @@ import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 import java.util.*
+import kotlin.math.abs
+import kotlin.math.min
 
 class DateTime {
     companion object {
         private val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm VV")
+
+        fun now() : ZonedDateTime{
+            return ZonedDateTime.now()
+        }
 
         /**
          * Format must be of type "yyyy-MM-dd HH:mm VV", such as:
@@ -44,7 +50,7 @@ class DateTime {
             val relativeFormatter = RelativeDateTimeFormatter.getInstance(
                 ULocale.getDefault(),
                 NumberFormat.getInstance(),
-                Style.SHORT,
+                Style.LONG,
                 DisplayContext.CAPITALIZATION_FOR_BEGINNING_OF_SENTENCE
             )
 
@@ -62,17 +68,29 @@ class DateTime {
                 return formatter.format(localDateTime)
             }
 
-            if (hours > 1) {
+            if (hours >= 1) {
                 return relativeFormatter.format(
                     hours.toDouble(),
                     Direction.NEXT,
                     RelativeUnit.HOURS
                 )
+            } else if (hours < 0) {
+                return relativeFormatter.format(
+                    abs(hours.toDouble()),
+                    Direction.LAST,
+                    RelativeUnit.HOURS
+                )
             }
-            if (minutes > 1) {
+            if (minutes >= 1) {
                 return relativeFormatter.format(
                     minutes.toDouble(),
                     Direction.NEXT,
+                    RelativeUnit.MINUTES
+                )
+            } else if (minutes < 0) {
+                return relativeFormatter.format(
+                    abs(minutes.toDouble()),
+                    Direction.LAST,
                     RelativeUnit.MINUTES
                 )
             }
