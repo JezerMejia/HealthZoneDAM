@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jezerm.healthzone.databinding.FragmentAppointmentsPatientBinding
 import com.jezerm.healthzone.entities.Appointment
@@ -65,6 +66,8 @@ class AppointmentsFragment : Fragment() {
         binding.rcvAppointmentList.layoutManager = LinearLayoutManager(requireContext())
         binding.rcvAppointmentList.adapter = AppointmentAdapter(appointmentList) {
             println("Clicked ${it.date}")
+            val action = AppointmentsFragmentDirections.actionAppointmentsToDetails(it)
+            findNavController().navigate(action)
         }
     }
 }
