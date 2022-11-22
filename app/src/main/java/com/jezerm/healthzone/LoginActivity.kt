@@ -54,6 +54,8 @@ class LoginActivity : AppCompatActivity() {
             runBlocking {
                 launch {
                     val user: List<User> = userDao.login(username, password)
+                    if (user.isEmpty())
+                        return@launch
                     intent.putExtra("logged_in", true)
                     intent.putExtra("doctor_mode", user[0].isDoctor)
                     Toast.makeText(applicationContext, user[0].toString(), Toast.LENGTH_SHORT).show()
