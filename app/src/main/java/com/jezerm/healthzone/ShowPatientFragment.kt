@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.jezerm.healthzone.databinding.FragmentShowPatientBinding
 import com.jezerm.healthzone.entities.User
 
@@ -29,14 +30,14 @@ class ShowPatientFragment : Fragment() {
     }
 
     private fun initData() {
-
+        binding.tvName.text = patient.fullName
     }
 
     companion object {
-        @JvmStatic fun newInstance(patient: User) =
+        @JvmStatic fun newInstance(selectedPatient: User) =
                 ShowPatientFragment().apply {
                     arguments = Bundle().apply {
-                        putSerializable("patient", patient)
+                        putSerializable("patient", selectedPatient)
                     }
                 }
     }
