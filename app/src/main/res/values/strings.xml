@@ -79,6 +79,9 @@
     <string name="specialty">Especialidad</string>
     <string name="email">E-mail</string>
     <string name="work_place">Lugar de trabajo</string>
+    <string name="prompt_first_name">Primer nombre</string>
+    <string name="prompt_lastname">Apellidos</string>
+    <string name="prompt_middle_name">Segundo nombre</string>
 
     <string-array name="options">
         <item>Oscuro</item>
