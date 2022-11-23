@@ -17,6 +17,7 @@ import com.jezerm.healthzone.data.AppointmentDAO
 import com.jezerm.healthzone.data.UserDAO
 import com.jezerm.healthzone.data.HospitalDAO
 import com.jezerm.healthzone.databinding.ActivityMainBinding
+import com.jezerm.healthzone.entities.User
 import com.jezerm.healthzone.ui.patient.AccountActivity
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -45,6 +46,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             return
         }
+        user = intent.getSerializableExtra("user") as User
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -121,5 +123,6 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         lateinit var appContext: Context
+        lateinit var user: User
     }
 }

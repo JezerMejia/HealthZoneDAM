@@ -7,9 +7,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
-    app:cardBackgroundColor="@color/md_theme_light_primaryContainer"
-    app:cardElevation="1dp"
+    app:cardBackgroundColor="?attr/colorPrimaryContainer"
+    app:cardElevation="2dp"
     app:contentPadding="8dp"
+    app:strokeWidth="0dp"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -22,18 +23,18 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageView"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            tools:srcCompat="@tools:sample/avatars"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             app:shapeAppearanceOverlay="@style/customRoundedImageView"
-            />
+            app:srcCompat="@drawable/ic_round_account_circle_24" />
+
         <TextView
+            android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:text="Juan Velásquez"
-            android:textSize="20sp" />
+            android:layout_marginLeft="16dp"
+            android:textSize="18sp" />
 
     </LinearLayout>
 

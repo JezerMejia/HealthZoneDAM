@@ -27,7 +27,10 @@ class User (
     @ColumnInfo(name = "sex") val sex: Boolean? = null,
     @ColumnInfo(name = "conditions") val conditions: String? = null,
 
-    ) {
+    ) : java.io.Serializable {
+    @Ignore var fullName: String = ""
+        get() = "$firstName $lastName"
+
     override fun toString(): String {
         return "ID: $id, Name: $firstName $lastName, isDoctor: ${isDoctor.toString()}"
     }

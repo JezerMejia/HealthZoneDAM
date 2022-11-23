@@ -1,6 +1,7 @@
 package com.jezerm.healthzone.data
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
@@ -36,9 +37,15 @@ interface UserDAO {
     @Update
     suspend fun update(user: User)
 
-    @Query("DELETE FROM User WHERE id =:id")
-    suspend fun delete(id:Int)
+    @Delete
+    suspend fun delete(user: User)
 
     @Query("SELECT * FROM User WHERE username = :username AND password = :password LIMIT 1")
     suspend fun login(username: String, password: String): List<User>
+
+    @Query("SELECT DISTINCT Patient.* FROM User as Doctor " +
+            "INNER JOIN Appointment ON doctor_id = Doctor.id " +
+            "INNER JOIN User as Patient ON Patient.id = Appointment.patient_id " +
+            "WHERE Doctor.id = :doctorId")
+    suspend fun getDoctorsPatients(doctorId: Int): List<User>
 }
