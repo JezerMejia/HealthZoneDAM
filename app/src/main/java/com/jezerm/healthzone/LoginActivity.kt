@@ -1,9 +1,9 @@
 package com.jezerm.healthzone
 
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import com.jezerm.healthzone.data.AppDatabase
 import com.jezerm.healthzone.data.AppointmentDAO
@@ -11,7 +11,6 @@ import com.jezerm.healthzone.data.HospitalDAO
 import com.jezerm.healthzone.data.UserDAO
 import com.jezerm.healthzone.databinding.ActivityLoginBinding
 import com.jezerm.healthzone.entities.User
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
@@ -38,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
                 val appointments = appointmentDao.getAll()
                 val hospitals = hospitalDao.getAll()
 
-                if(users.isEmpty()) {
+                if (users.isEmpty()) {
                     userDao.insertTestPatient()
                     userDao.insertTestDoctor()
                     appointmentDao.insertTestAppointment()
@@ -53,12 +52,10 @@ class LoginActivity : AppCompatActivity() {
             val password: String = binding.etPassword.text.toString()
             runBlocking {
                 launch {
-                    val user: List<User> = userDao.login(username, password)
-                    if (user.isEmpty())
+                    val userList = userDao.login(username, password)
+                    if (userList.isEmpty())
                         return@launch
-                    intent.putExtra("logged_in", true)
-                    intent.putExtra("doctor_mode", user[0].isDoctor)
-                    intent.putExtra("user", user[0])
+                    setSavedUser(userList.first())
                     startActivity(intent)
                 }
             }
@@ -69,6 +66,16 @@ class LoginActivity : AppCompatActivity() {
                 this.putExtra("doctor_mode", true)
             }
             startActivity(intent)
+        }
+    }
+
+    private fun setSavedUser(user: User) {
+        val sharedPref = getSharedPreferences(
+            getString(R.string.preference_file_key), Context.MODE_PRIVATE
+        )
+        sharedPref.edit().apply {
+            putInt("saved_user_id", user.id)
+            apply()
         }
     }
 }

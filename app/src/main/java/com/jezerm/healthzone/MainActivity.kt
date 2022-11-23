@@ -16,9 +16,6 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.jezerm.healthzone.data.AppDatabase
-import com.jezerm.healthzone.data.AppointmentDAO
-import com.jezerm.healthzone.data.UserDAO
-import com.jezerm.healthzone.data.HospitalDAO
 import com.jezerm.healthzone.databinding.ActivityMainBinding
 import com.jezerm.healthzone.entities.User
 import com.jezerm.healthzone.ui.patient.AccountActivity
@@ -29,8 +26,6 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-    private var logged_in = false
-    private var doctor_mode = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         appContext = applicationContext
@@ -38,30 +33,49 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
 
-        logged_in = intent.getBooleanExtra("logged_in", false)
-        doctor_mode = intent.getBooleanExtra("doctor_mode", false)
-
-        if (!logged_in) {
-            val intent = Intent(this, LoginActivity::class.java).apply {
-                this.flags =
-                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NO_HISTORY
+        runBlocking {
+            launch {
+                val savedUser = getSavedUser()
+                if (savedUser == null) {
+                    val intent = Intent(appContext, LoginActivity::class.java).apply {
+                        this.flags =
+                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NO_HISTORY
+                    }
+                    startActivity(intent)
+                    return@launch
+                }
+                user = savedUser
+                init()
             }
-            startActivity(intent)
-            return
         }
-        user = intent.getSerializableExtra("user") as User
+    }
 
+    private fun init() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
 
-        if (doctor_mode) {
+        if (user.isDoctor) {
             setupDoctorView()
         } else {
             setupPatientView()
         }
+    }
 
+    private suspend fun getSavedUser(): User? {
+        val sharedPref = getSharedPreferences(
+            getString(R.string.preference_file_key), Context.MODE_PRIVATE
+        )
+        val savedUserId = sharedPref.getInt("saved_user_id", -1)
+
+        val db = AppDatabase.getInstance(applicationContext)
+        val userDao = db.userDao()
+
+        val userList = userDao.getUserById(savedUserId)
+        if (userList.isEmpty()) return null
+
+        return userList.first()
     }
 
     private fun setupPatientView() {
