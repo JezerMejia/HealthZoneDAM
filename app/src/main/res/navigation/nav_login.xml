@@ -19,12 +19,20 @@
         android:id="@+id/navigation_login"
         android:name="com.jezerm.healthzone.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_login_to_register_patient"
-            app:destination="@id/navigation_register_patient" />
+            app:destination="@id/navigation_register_patient"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
         <action
             android:id="@+id/action_login_to_register_doctor"
-            app:destination="@id/navigation_register_doctor" />
+            app:destination="@id/navigation_register_doctor"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
     </fragment>
 </navigation>
