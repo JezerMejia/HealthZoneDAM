@@ -65,7 +65,7 @@
 
                 <Button
                     android:id="@+id/btnRegister"
-                    style="@style/ThemeOverlay.Material3.Button.TonalButton"
+                    style="@style/Widget.Material3.Button.TonalButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="6dp"
@@ -73,7 +73,6 @@
 
                 <Button
                     android:id="@+id/btnLogin"
-                    style="@style/Widget.Material3.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
