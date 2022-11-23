@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_show_patient"
-        android:name="com.jezerm.healthzone.ui.doctor.ShowPatientFragment"
+        android:name="com.jezerm.healthzone.ui.doctor.show_patient.ShowPatientFragment"
         android:label="fragment_show_patient"
         tools:layout="@layout/fragment_show_patient" >
         <argument
