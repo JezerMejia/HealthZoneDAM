@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.jezerm.healthzone.databinding.ActivityAccountPatientBinding
+import com.jezerm.healthzone.entities.User
 import com.jezerm.healthzone.ui.patient.AccountFragments.FirstFragment
 import com.jezerm.healthzone.ui.patient.AccountFragments.SecondFragment
 
@@ -18,13 +19,16 @@ class AccountActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
+
+        val user = intent.getParcelableExtra<User>("user") ?: return
+
         binding = ActivityAccountPatientBinding.inflate(layoutInflater)
         setContentView(binding.root)
         start()
         setSupportActionBar(binding.toolbar)
 
         supportActionBar?.apply {
-            title = "Juan Pérez"
+            title = user.fullName
 
             // show back button on toolbar
             // on back button press, it will navigate to parent activity

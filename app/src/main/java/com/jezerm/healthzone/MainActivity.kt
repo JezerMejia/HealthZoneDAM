@@ -111,7 +111,9 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
     }
 
     private fun openAccountView(): Boolean {
-        val intent = Intent(this, AccountActivity::class.java)
+        val intent = Intent(this, AccountActivity::class.java).apply {
+            this.putExtra("user", user)
+        }
         startActivity(intent)
         return true
     }

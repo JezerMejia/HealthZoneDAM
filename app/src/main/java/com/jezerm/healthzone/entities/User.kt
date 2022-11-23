@@ -1,11 +1,14 @@
 package com.jezerm.healthzone.entities
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
 @Entity
+@Parcelize
 class User (
     @PrimaryKey(autoGenerate = true) val id: Int,
     @ColumnInfo(name = "username") val username: String,
@@ -27,7 +30,7 @@ class User (
     @ColumnInfo(name = "sex") val sex: Boolean? = null,
     @ColumnInfo(name = "conditions") val conditions: String? = null,
 
-    ) : java.io.Serializable {
+    ) : Parcelable {
     @Ignore var fullName: String = ""
         get() = "$firstName $lastName"
 
