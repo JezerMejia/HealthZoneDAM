@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_login"
+    app:startDestination="@id/navigation_login">
+
+    <fragment
+        android:id="@+id/navigation_register_patient"
+        android:name="com.jezerm.healthzone.ui.register.RegisterPatientFragment"
+        android:label="fragment_register_patient"
+        tools:layout="@layout/fragment_register_patient" />
+    <fragment
+        android:id="@+id/navigation_register_doctor"
+        android:name="com.jezerm.healthzone.ui.register.RegisterMedicoFragment"
+        android:label="fragment_register_medico"
+        tools:layout="@layout/fragment_register_medico" />
+    <fragment
+        android:id="@+id/navigation_login"
+        android:name="com.jezerm.healthzone.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_login_to_register_patient"
+            app:destination="@id/navigation_register_patient" />
+        <action
+            android:id="@+id/action_login_to_register_doctor"
+            app:destination="@id/navigation_register_doctor" />
+    </fragment>
+</navigation>
