@@ -1,4 +1,4 @@
-package register
+package com.jezerm.healthzone.ui.register
 
 import android.os.Bundle
 import android.view.LayoutInflater

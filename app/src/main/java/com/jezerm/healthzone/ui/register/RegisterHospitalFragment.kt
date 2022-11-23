@@ -1,14 +1,14 @@
-package register
+package com.jezerm.healthzone.ui.register
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.jezerm.healthzone.databinding.FragmentRegisterPatientBinding
+import com.jezerm.healthzone.databinding.FragmentRegisterHospitalBinding
 
-class RegistrarPatientFragment : Fragment() {
-    private lateinit var binding: FragmentRegisterPatientBinding
+class RegisterHospitalFragment: Fragment() {
+    private lateinit var binding: FragmentRegisterHospitalBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +21,7 @@ class RegistrarPatientFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentRegisterPatientBinding.inflate(inflater, container, false)
+        binding = FragmentRegisterHospitalBinding.inflate(inflater, container, false)
         return binding.root
     }
 }
