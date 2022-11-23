@@ -32,7 +32,7 @@
                     android:layout_gravity="center"
                     android:layout_marginBottom="24dp"
                     android:gravity="center"
-                    android:text="Registrar médico"
+                    android:text="@string/title_register_doctor"
                     android:textSize="32sp"
                     android:textStyle="bold" />
 
@@ -41,7 +41,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="25dp"
-                    android:hint="Medico">
+                    android:hint="@string/user">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -53,7 +53,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="25dp"
-                    android:hint="Especialidad">
+                    android:hint="@string/specialty">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -65,7 +65,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="25dp"
-                    android:hint="Telefono">
+                    android:hint="@string/cellphone">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -77,7 +77,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="25dp"
-                    android:hint="E-mail">
+                    android:hint="@string/email">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -89,13 +89,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="25dp"
-                    android:hint="Lugar de trabajo">
+                    android:hint="@string/work_place">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
-
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -105,11 +104,18 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/btnRegister"
-                        style="@style/ThemeOverlay.Material3.Button.TonalButton"
+                        android:id="@+id/btnCancel"
+                        style="@style/Widget.Material3.Button.TonalButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="6dp"
+                        android:layout_marginHorizontal="6dp"
+                        android:text="@string/action_cancel" />
+
+                    <Button
+                        android:id="@+id/btnRegister"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="6dp"
                         android:text="@string/action_register" />
 
                 </LinearLayout>
