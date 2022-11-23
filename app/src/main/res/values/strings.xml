@@ -59,4 +59,13 @@
     <string name="title_appointment_details">Detalles</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--Settings-->
+    <string name="settings">Test</string>
+    <string-array name="options">
+        <item>Oscuro</item>
+        <item>Claro</item>
+        <item>Automatico</item>
+    </string-array>
+
 </resources>

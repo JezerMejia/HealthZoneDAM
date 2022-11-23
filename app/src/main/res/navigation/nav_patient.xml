@@ -38,6 +38,6 @@
     <fragment
         android:id="@+id/navigation_settings"
         android:name="com.jezerm.healthzone.ui.patient.SettingsFragment"
-        android:label="fragment_settings"
+        android:label="Ajustes"
         tools:layout="@layout/fragment_settings" />
 </navigation>
