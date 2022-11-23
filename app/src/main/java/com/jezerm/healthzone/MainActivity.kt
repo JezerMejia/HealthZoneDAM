@@ -5,8 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -22,7 +25,7 @@ import com.jezerm.healthzone.ui.patient.AccountActivity
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -75,6 +78,7 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.bottomNavigation.setupWithNavController(navController)
+        navController.addOnDestinationChangedListener(this)
     }
 
     private fun setupDoctorView() {
@@ -124,5 +128,17 @@ class MainActivity : AppCompatActivity() {
     companion object {
         lateinit var appContext: Context
         lateinit var user: User
+    }
+
+    override fun onDestinationChanged(
+        controller: NavController,
+        destination: NavDestination,
+        arguments: Bundle?
+    ) {
+        if (destination.id == R.id.navigation_maps) {
+            binding.btnAddAppointment.visibility = View.GONE
+        } else {
+            binding.btnAddAppointment.visibility = View.VISIBLE
+        }
     }
 }
