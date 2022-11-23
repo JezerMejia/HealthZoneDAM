@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.appcompat.app.AppCompatDelegate
 import com.jezerm.healthzone.R
 import com.jezerm.healthzone.databinding.FragmentAppointmentsPatientBinding
 import com.jezerm.healthzone.databinding.FragmentHomePatientBinding
@@ -28,6 +29,20 @@ class SettingsFragment : Fragment() {
         val options = resources.getStringArray(R.array.options)
         val arrayAdapter = ArrayAdapter(requireContext(),R.layout.dropdown_item, options)
         binding.autoCompleteTextView.setAdapter(arrayAdapter)
+        changeTheme()
         return binding.root
+    }
+
+    private fun changeTheme(){
+        val switch = binding.switch1
+        val autocomplete = binding.autoCompleteTextView
+
+        switch.setOnCheckedChangeListener { _, _ ->
+            if(switch.isChecked){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else{
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
     }
 }
