@@ -27,6 +27,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tvTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -58,9 +59,9 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etPassword"
-                        android:inputType="textPassword"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -72,9 +73,9 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etFirstName"
-                        android:inputType="textPersonName"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -86,9 +87,9 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etMiddleName"
-                        android:inputType="textPersonName"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -100,9 +101,9 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etLastname"
-                        android:inputType="textPersonName"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -114,9 +115,9 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etCellphone"
-                        android:inputType="phone"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:inputType="phone" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <LinearLayout
@@ -127,12 +128,12 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/btnCancel"
+                        android:id="@+id/btnBack"
                         style="@style/Widget.Material3.Button.TonalButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="6dp"
-                        android:text="@string/action_cancel" />
+                        android:text="@string/action_back" />
 
                     <Button
                         android:id="@+id/btnRegister"

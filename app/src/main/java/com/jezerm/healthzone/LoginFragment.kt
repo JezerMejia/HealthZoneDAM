@@ -71,11 +71,11 @@ class LoginFragment : Fragment() {
         }
 
         binding.btnRegister.setOnClickListener {
-            val action = LoginFragmentDirections.actionLoginToRegisterPatient()
+            val action = LoginFragmentDirections.actionLoginToRegisterUser(false)
             findNavController().navigate(action)
         }
         binding.btnRegisterDoctor.setOnClickListener {
-            val action = LoginFragmentDirections.actionLoginToRegisterDoctor()
+            val action = LoginFragmentDirections.actionLoginToRegisterUser(true)
             findNavController().navigate(action)
         }
     }
