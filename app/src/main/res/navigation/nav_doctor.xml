@@ -11,12 +11,16 @@
         android:label="@string/action_home"
         tools:layout="@layout/fragment_home_doctor" >
         <action
-            android:id="@+id/action_navigation_home_to_showPatientFragment"
-            app:destination="@id/showPatientFragment" />
+            android:id="@+id/action_home_to_show_patient"
+            app:destination="@id/navigation_show_patient" />
     </fragment>
     <fragment
-        android:id="@+id/showPatientFragment"
+        android:id="@+id/navigation_show_patient"
         android:name="com.jezerm.healthzone.ui.doctor.ShowPatientFragment"
         android:label="fragment_show_patient"
-        tools:layout="@layout/fragment_show_patient" />
+        tools:layout="@layout/fragment_show_patient" >
+        <argument
+            android:name="patient"
+            app:argType="com.jezerm.healthzone.entities.User" />
+    </fragment>
 </navigation>
