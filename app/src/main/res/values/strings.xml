@@ -82,6 +82,8 @@
     <string name="prompt_first_name">Primer nombre</string>
     <string name="prompt_lastname">Apellidos</string>
     <string name="prompt_middle_name">Segundo nombre</string>
+    <string name="action_continue">Continuar</string>
+    <string name="action_back">Atrás</string>
 
     <string-array name="options">
         <item>Oscuro</item>
