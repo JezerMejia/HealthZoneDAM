@@ -43,6 +43,9 @@ interface UserDAO {
     @Query("SELECT * FROM User WHERE username = :username AND password = :password LIMIT 1")
     suspend fun login(username: String, password: String): List<User>
 
+    @Query("SELECT * FROM User WHERE id = :id LIMIT 1")
+    suspend fun getUserById(id: Int): List<User>
+
     @Query("SELECT DISTINCT Patient.* FROM User as Doctor " +
             "INNER JOIN Appointment ON doctor_id = Doctor.id " +
             "INNER JOIN User as Patient ON Patient.id = Appointment.patient_id " +
