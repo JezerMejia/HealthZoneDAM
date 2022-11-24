@@ -61,10 +61,13 @@
 
     <!--Settings-->
     <string name="settings">Test</string>
+    <string name="options_dark">Oscuro</string>
+    <string name="options_light">Claro</string>
+    <string name="options_automatic">Automático</string>
     <string-array name="options">
-        <item>Oscuro</item>
-        <item>Claro</item>
-        <item>Automatico</item>
+        <item>@string/options_dark</item>
+        <item>@string/options_light</item>
+        <item>@string/options_automatic</item>
     </string-array>
 
 </resources>
