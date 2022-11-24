@@ -10,4 +10,7 @@ interface PrescriptionDAO {
     @Transaction
     @Query("SELECT * FROM Prescription")
     suspend fun getAll(): List<PrescriptionWithMedicine>
+
+    @Query("SELECT * FROM Prescription WHERE user_id = :userId")
+    suspend fun getPrescriptionsOfUser(userId: Int): List<PrescriptionWithMedicine>
 }
