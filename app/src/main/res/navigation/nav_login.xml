@@ -66,10 +66,10 @@
             android:name="user"
             app:argType="com.jezerm.healthzone.entities.User" />
         <action
-            android:id="@+id/action_navigation_register_patient_to_navigation_login"
+            android:id="@+id/action_register_patient_to_login"
             app:destination="@id/navigation_login"
-            app:enterAnim="@anim/slide_in"
-            app:exitAnim="@anim/fade_out"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_out"
             app:popUpTo="@id/navigation_login"
             app:popUpToInclusive="true" />
     </fragment>
