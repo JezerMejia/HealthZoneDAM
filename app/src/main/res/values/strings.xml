@@ -74,7 +74,7 @@
     <string name="age">Edad</string>
     <string name="height">Altura</string>
     <string name="weight">Peso</string>
-    <string name="sexooo">Sexo</string>
+    <string name="prompt_sex">Sexo</string>
     <string name="cellphone">Teléfono</string>
     <string name="specialty">Especialidad</string>
     <string name="email">E-mail</string>
@@ -87,11 +87,22 @@
     <string name="register_succeeded">Registro completado</string>
     <string name="register_succeeded_message">Su usuario fue registrado con éxito.</string>
     <string name="action_accept">Aceptar</string>
+    <string name="prompt_age">Edad</string>
+    <string name="prompt_weight">Peso (kg)</string>
+    <string name="prompt_height">Altura (cm)</string>
+    <string name="prompt_conditions">Condiciones</string>
 
     <string-array name="options">
         <item>Oscuro</item>
         <item>Claro</item>
         <item>Automatico</item>
+    </string-array>
+
+    <string name="sex_male">Hombre</string>
+    <string name="sex_female">Mujer</string>
+    <string-array name="sex">
+        <item>@string/sex_male</item>
+        <item>@string/sex_female</item>
     </string-array>
 
 </resources>
