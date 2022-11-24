@@ -1,15 +1,12 @@
 package com.jezerm.healthzone.entities
 
 import android.os.Parcelable
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.Ignore
-import androidx.room.PrimaryKey
+import androidx.room.*
 import kotlinx.parcelize.Parcelize
 
 @Entity
 @Parcelize
-class User (
+class User(
     @PrimaryKey(autoGenerate = true) val id: Int,
     @ColumnInfo(name = "username") var username: String,
     @ColumnInfo(name = "password") var password: String,
@@ -32,10 +29,22 @@ class User (
     @ColumnInfo(name = "conditions") var conditions: String? = null,
 
     ) : Parcelable {
-    @Ignore var fullName: String = ""
+    @Ignore
+    var fullName: String = ""
         get() = "$firstName $lastName"
 
     override fun toString(): String {
-        return "ID: $id, Name: $firstName $lastName, isDoctor: ${isDoctor.toString()}"
+        return "ID: $id, Name: $firstName $lastName, isDoctor: $isDoctor"
     }
 }
+
+@Parcelize
+data class UserWithPrescription(
+    @Embedded val user: User,
+    @Relation(
+        entity = Prescription::class,
+        parentColumn = "id",
+        entityColumn = "user_id"
+    )
+    val prescriptionList: List<PrescriptionWithMedicine>
+) : Parcelable
