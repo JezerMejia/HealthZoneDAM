@@ -65,6 +65,7 @@ class RegisterMedicoFragment: Fragment() {
 
         user.specialty = specialty
         user.hospitalId = 1
+        user.email = email
 
         runBlocking {
             launch {
@@ -76,7 +77,8 @@ class RegisterMedicoFragment: Fragment() {
                     user.lastName,
                     user.telephone,
                     user.hospitalId!!,
-                    user.specialty!!
+                    user.specialty!!,
+                    user.email!!
                 )
 
                 val action = RegisterMedicoFragmentDirections.actionRegisterDoctorToLogin()

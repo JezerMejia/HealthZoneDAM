@@ -8,7 +8,7 @@ import com.jezerm.healthzone.entities.User
 import com.jezerm.healthzone.entities.Appointment
 import com.jezerm.healthzone.entities.Hospital
 
-@Database(entities = [User::class, Appointment::class, Hospital::class], version = 1)
+@Database(entities = [User::class, Appointment::class, Hospital::class], version = 2, exportSchema = true)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDAO
     abstract fun appointmentDao(): AppointmentDAO

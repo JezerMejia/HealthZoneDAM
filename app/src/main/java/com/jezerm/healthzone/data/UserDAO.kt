@@ -26,8 +26,8 @@ interface UserDAO {
 
     @Query(
         "INSERT INTO User " +
-                "(username, password, first_name, middle_name, last_name, telephone, is_doctor, hospital_id, specialty) VALUES" +
-                "('doctor', '123', 'jose', 'manuel', 'garcia', '88887777', 1, 1, 'cancer')"
+                "(username, password, first_name, middle_name, last_name, telephone, is_doctor, hospital_id, specialty, email) VALUES" +
+                "('doctor', '123', 'jose', 'manuel', 'garcia', '88887777', 1, 1, 'cancer', 'jose.manuel@mail.com')"
     )
     suspend fun insertTestDoctor()
 
@@ -56,8 +56,8 @@ interface UserDAO {
 
     @Query(
         "INSERT INTO User" +
-                "(username, password, first_name, middle_name, last_name, telephone, is_doctor, hospital_id, specialty) VALUES" +
-                "(:username, :password, :firstName, :middleName, :lastName, :telephone, 1, :hospital, :specialty)"
+                "(username, password, first_name, middle_name, last_name, telephone, is_doctor, hospital_id, specialty, email) VALUES" +
+                "(:username, :password, :firstName, :middleName, :lastName, :telephone, 1, :hospital, :specialty, :email)"
     )
     suspend fun insertDoctor(
         username: String,
@@ -67,7 +67,8 @@ interface UserDAO {
         lastName: String,
         telephone: String?,
         hospital: Int,
-        specialty: String
+        specialty: String,
+        email: String,
     )
 
     @Query(

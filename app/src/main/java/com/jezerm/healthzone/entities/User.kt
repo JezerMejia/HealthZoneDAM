@@ -22,6 +22,7 @@ class User (
     // Doctor only
     @ColumnInfo(name = "hospital_id") var hospitalId: Int? = null,
     @ColumnInfo(name = "specialty") var specialty: String? = null,
+    @ColumnInfo(name = "email") var email: String? = null,
 
     // Patient only
     @ColumnInfo(name = "age") var age: Int? = null,
