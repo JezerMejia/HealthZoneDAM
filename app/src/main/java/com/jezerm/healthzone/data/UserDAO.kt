@@ -74,7 +74,7 @@ interface UserDAO {
     @Query(
         "INSERT INTO User" +
                 "(username, password, first_name, middle_name, last_name, telephone, is_doctor, age, weight, height, sex, conditions) VALUES" +
-                "(:username, :password, :firstName, :middleName, :lastName, :telephone, 1, :age, :weight, :height, :sex, :conditions)"
+                "(:username, :password, :firstName, :middleName, :lastName, :telephone, 0, :age, :weight, :height, :sex, :conditions)"
     )
     suspend fun insertPatient(
         username: String,
