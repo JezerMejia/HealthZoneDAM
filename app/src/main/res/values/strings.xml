@@ -84,6 +84,9 @@
     <string name="prompt_middle_name">Segundo nombre</string>
     <string name="action_continue">Continuar</string>
     <string name="action_back">Atrás</string>
+    <string name="register_succeeded">Registro completado</string>
+    <string name="register_succeeded_message">Su usuario fue registrado con éxito.</string>
+    <string name="action_accept">Aceptar</string>
 
     <string-array name="options">
         <item>Oscuro</item>

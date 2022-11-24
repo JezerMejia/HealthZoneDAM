@@ -62,23 +62,25 @@ class RegisterUserFragment : Fragment() {
         val middleName = binding.etMiddleName.text.toString()
         val lastName = binding.etLastname.text.toString()
         val cellphone = binding.etCellphone.text.toString()
+        var thereIsError = false
 
         if (username.isBlank()) {
+            thereIsError = true
             binding.etUsername.error = "Campo requerido"
-            return null
         }
         if (password.isBlank()) {
+            thereIsError = true
             binding.etPassword.error = "Campo requerido"
-            return null
         }
         if (firstName.isBlank()) {
+            thereIsError = true
             binding.etFirstName.error = "Campo requerido"
-            return null
         }
         if (lastName.isBlank()) {
+            thereIsError = true
             binding.etLastname.error = "Campo requerido"
-            return null
         }
+        if (thereIsError) return null
 
         return User(1, username, password, firstName, middleName, lastName, cellphone)
     }

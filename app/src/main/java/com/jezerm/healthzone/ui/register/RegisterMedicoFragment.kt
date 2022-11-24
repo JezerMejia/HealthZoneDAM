@@ -6,7 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.jezerm.healthzone.MainActivity.Companion.user
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.jezerm.healthzone.R
 import com.jezerm.healthzone.data.AppDatabase
 import com.jezerm.healthzone.data.UserDAO
 import com.jezerm.healthzone.databinding.FragmentRegisterMedicoBinding
@@ -14,7 +15,7 @@ import com.jezerm.healthzone.entities.User
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-class RegisterMedicoFragment: Fragment() {
+class RegisterMedicoFragment : Fragment() {
     private lateinit var binding: FragmentRegisterMedicoBinding
     private lateinit var userDao: UserDAO
     private lateinit var user: User
@@ -43,25 +44,31 @@ class RegisterMedicoFragment: Fragment() {
         binding.btnRegister.setOnClickListener {
             addDoctor()
         }
+        binding.btnBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     private fun addDoctor() {
         val email = binding.etEmail.text.toString()
         val specialty = binding.etSpecialty.text.toString()
         val hospital = binding.etWorkplace.text.toString()
+        var thereIsError = false
 
-        if (email.isBlank()) {
-            binding.etEmail.error = "Campo requerido"
-            return
-        }
         if (specialty.isBlank()) {
+            thereIsError = true
             binding.etSpecialty.error = "Campo requerido"
-            return
+        }
+        if (email.isBlank()) {
+            thereIsError = true
+            binding.etEmail.error = "Campo requerido"
         }
         if (hospital.isBlank()) {
+            thereIsError = true
             binding.etWorkplace.error = "Campo requerido"
-            return
         }
+
+        if (thereIsError) return
 
         user.specialty = specialty
         user.hospitalId = 1
@@ -81,9 +88,21 @@ class RegisterMedicoFragment: Fragment() {
                     user.email!!
                 )
 
+                showConfirmDialog()
+            }
+        }
+    }
+
+    private fun showConfirmDialog() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(resources.getString(R.string.register_succeeded))
+            .setMessage(resources.getString(R.string.register_succeeded_message))
+            .setPositiveButton(resources.getString(R.string.action_accept)) { _, _ ->
+            }
+            .setOnDismissListener {
                 val action = RegisterMedicoFragmentDirections.actionRegisterDoctorToLogin()
                 findNavController().navigate(action)
             }
-        }
+            .show()
     }
 }
