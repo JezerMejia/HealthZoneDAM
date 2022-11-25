@@ -8,15 +8,27 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 class Prescription(
     @PrimaryKey(autoGenerate = true) val id: Int,
-    @ColumnInfo(name = "user_id") var userId: Long?,
+    @ColumnInfo(name = "subject") var subject: String,
+    @ColumnInfo(name = "patient_id") var patientId: Long?,
+    @ColumnInfo(name = "doctor_id") var doctorId: Long?,
 ) : Parcelable
 
 @Parcelize
-data class PrescriptionWithMedicine(
+data class PrescriptionFull(
     @Embedded val prescription: Prescription,
     @Relation(
         parentColumn = "id",
         entityColumn = "prescription_id"
     )
-    val medicineList: List<Medicine>
+    val medicineList: List<Medicine>,
+    @Relation(
+        parentColumn = "patient_id",
+        entityColumn = "id",
+    )
+    val patient: User?,
+    @Relation(
+        parentColumn = "doctor_id",
+        entityColumn = "id",
+    )
+    val doctor: User?
 ) : Parcelable

@@ -44,7 +44,7 @@ data class UserWithPrescription(
     @Relation(
         entity = Prescription::class,
         parentColumn = "id",
-        entityColumn = "user_id"
+        entityColumn = "patient_id"
     )
-    val prescriptionList: List<PrescriptionWithMedicine>
+    val prescriptionList: List<PrescriptionFull>
 ) : Parcelable

@@ -3,14 +3,23 @@ package com.jezerm.healthzone.data
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Transaction
-import com.jezerm.healthzone.entities.PrescriptionWithMedicine
+import com.jezerm.healthzone.entities.PrescriptionFull
+import com.jezerm.healthzone.entities.User
 
 @Dao
 interface PrescriptionDAO {
     @Transaction
     @Query("SELECT * FROM Prescription")
-    suspend fun getAll(): List<PrescriptionWithMedicine>
+    suspend fun getAll(): List<PrescriptionFull>
 
-    @Query("SELECT * FROM Prescription WHERE user_id = :userId")
-    suspend fun getPrescriptionsOfUser(userId: Int): List<PrescriptionWithMedicine>
+    @Transaction
+    @Query("SELECT * FROM Prescription WHERE patient_id = :patientId")
+    suspend fun getPrescriptionsOfPatient(patientId: Int): List<PrescriptionFull>
+
+    suspend fun getPrescriptionsOfPatient(patient: User): List<PrescriptionFull> {
+        return getPrescriptionsOfPatient(patient.id)
+    }
+
+    @Query("INSERT INTO Prescription (subject, patient_id, doctor_id) VALUES (:subject, :patientId, :doctorId)")
+    suspend fun insertPrescription(subject: String, patientId: Long?, doctorId: Long?)
 }

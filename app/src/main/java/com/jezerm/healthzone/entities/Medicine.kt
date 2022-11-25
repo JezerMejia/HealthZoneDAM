@@ -13,4 +13,5 @@ class Medicine(
     @ColumnInfo(name = "prescription_id") var prescriptionId: Long?,
     @ColumnInfo(name = "name") var name: String,
     @ColumnInfo(name = "quantity") var quantity: Long,
+    @ColumnInfo(name = "period") var period: Long,
 ) : Parcelable
