@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.navigation.findNavController
@@ -13,6 +14,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.jezerm.healthzone.databinding.ActivityMainBinding
 import com.jezerm.healthzone.ui.patient.AccountActivity
+import com.jezerm.healthzone.ui.patient.Addbuttom
 
 class MainActivity : AppCompatActivity() {
 
@@ -46,6 +48,13 @@ class MainActivity : AppCompatActivity() {
             setupDoctorView()
         } else {
             setupPatientView()
+        }
+
+        binding.btnAddAppointment.setOnClickListener{
+            Addbuttom(onSubmitClicklistener = {
+                Toast.makeText(this,"SEXOOOOOOOO", Toast.LENGTH_SHORT).show()
+                }
+            ).show(supportFragmentManager,"Test")
         }
     }
 
