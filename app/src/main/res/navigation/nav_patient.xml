@@ -43,8 +43,8 @@
     <fragment
         android:id="@+id/navigation_prescriptions"
         android:name="com.jezerm.healthzone.ui.patient.PrescriptionsFragment"
-        android:label="fragment_prescriptions"
-        tools:layout="@layout/fragment_prescriptions" >
+        android:label="@string/title_prescriptions"
+        tools:layout="@layout/fragment_prescriptions">
         <action
             android:id="@+id/action_prescriptions_to_prescription_details"
             app:destination="@id/navigation_prescription_details" />
@@ -52,8 +52,8 @@
     <fragment
         android:id="@+id/navigation_prescription_details"
         android:name="com.jezerm.healthzone.ui.patient.prescription.PrescriptionDetailsFragment"
-        android:label="fragment_prescription_details"
-        tools:layout="@layout/fragment_prescription_details" >
+        android:label="@string/title_prescription_details"
+        tools:layout="@layout/fragment_prescription_details">
         <argument
             android:name="prescription_full"
             app:argType="com.jezerm.healthzone.entities.PrescriptionFull" />
