@@ -1,5 +1,7 @@
 package com.jezerm.healthzone
 
+import android.animation.Animator
+import android.animation.Animator.AnimatorListener
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -26,6 +28,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private var requiresFab = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         appContext = applicationContext
@@ -61,6 +64,17 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         } else {
             setupPatientView()
         }
+
+        binding.fabPrimary.addOnHideAnimationListener(object : AnimatorListener {
+            override fun onAnimationStart(p0: Animator) {}
+            override fun onAnimationEnd(p0: Animator) {
+                if (!requiresFab) return
+                binding.fabPrimary.show()
+            }
+
+            override fun onAnimationCancel(p0: Animator) {}
+            override fun onAnimationRepeat(p0: Animator) {}
+        })
     }
 
     private suspend fun getSavedUser(): User? {
@@ -151,10 +165,14 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         destination: NavDestination,
         arguments: Bundle?
     ) {
-        if (destination.id == R.id.navigation_maps) {
-            binding.btnAddAppointment.visibility = View.GONE
-        } else {
-            binding.btnAddAppointment.visibility = View.VISIBLE
-        }
+        requiresFab = destination.id in setOf(
+            R.id.navigation_home,
+            R.id.navigation_prescriptions,
+            R.id.navigation_settings,
+        )
+        if (requiresFab)
+            binding.fabPrimary.show()
+        binding.fabPrimary.hide()
+        binding.fabPrimary.visibility = View.VISIBLE
     }
 }
