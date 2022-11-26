@@ -93,10 +93,16 @@ class PrescriptionsFragment : Fragment() {
         runBlocking {
             launch {
                 val adapter = binding.rcvPrescriptionList.adapter
+
+                val toRemoveList = when (prescription.completed) {
+                    true -> completedList
+                    false -> prescriptionList
+                }
+
                 prescriptionDao.delete(prescription)
-                prescriptionList.removeAt(position)
+                toRemoveList.removeAt(position)
                 adapter?.notifyItemRemoved(position)
-                adapter?.notifyItemRangeChanged(position, prescriptionList.size)
+                adapter?.notifyItemRangeChanged(position, toRemoveList.size)
             }
         }
     }
