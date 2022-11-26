@@ -8,25 +8,40 @@ import com.jezerm.healthzone.databinding.PatientPrescriptionItemBinding
 import com.jezerm.healthzone.entities.PrescriptionFull
 
 class PrescriptionAdapter(
-    var list: ArrayList<PrescriptionFull>,
-    private val clickListener: (PrescriptionFull) -> Unit = { }
+    var list: List<PrescriptionFull>,
+    private val clickListener: (PrescriptionFull) -> Unit = {}
 ) : RecyclerView.Adapter<PrescriptionAdapter.PrescriptionHolder>() {
+
+    var completeListener: (PrescriptionFull, Int) -> Unit = { p, i -> }
+    var deleteListener: (PrescriptionFull, Int) -> Unit = { p, i -> }
 
     inner class PrescriptionHolder(private val binding: PatientPrescriptionItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun load(prescriptionFull: PrescriptionFull) {
             val resources = binding.root.resources
-            binding.tvSubject.text = prescriptionFull.prescription.subject
-            binding.tvDetails.text = prescriptionFull.prescription.details
+            val prescription = prescriptionFull.prescription
+            binding.tvSubject.text = prescription.subject
+            binding.tvDetails.text = prescription.details
             binding.tvQuantity.text =
                 resources.getString(
                     R.string.prescription_size_quantity,
                     prescriptionFull.medicineList.size
                 )
 
+            when (prescription.completed) {
+                true -> binding.btnComplete.text = resources.getString(R.string.action_uncomplete)
+                false -> binding.btnComplete.text = resources.getString(R.string.action_complete)
+            }
+
             binding.cardContainer.setOnClickListener {
                 clickListener(prescriptionFull)
+            }
+            binding.btnComplete.setOnClickListener {
+                completeListener(prescriptionFull, adapterPosition)
+            }
+            binding.btnDelete.setOnClickListener {
+                deleteListener(prescriptionFull, adapterPosition)
             }
         }
     }
