@@ -89,6 +89,10 @@
     <string name="prompt_height">Altura (cm)</string>
     <string name="prompt_conditions">Condiciones</string>
 
+    <!--Prescriptions-->
+    <string name="medicine_quantity">Cantidad: %1$d</string>
+    <string name="prescription_size_quantity">Medicinas: %1$d</string>
+
     <!--Settings-->
     <string name="settings">Test</string>
     <string name="options_dark">Oscuro</string>
@@ -102,6 +106,9 @@
 
     <string name="sex_male">Hombre</string>
     <string name="sex_female">Mujer</string>
+    <string name="action_show_more">Ver más</string>
+    <string name="action_delete">Eliminar</string>
+    <string name="action_complete">Completar</string>
     <string-array name="sex">
         <item>@string/sex_male</item>
         <item>@string/sex_female</item>
