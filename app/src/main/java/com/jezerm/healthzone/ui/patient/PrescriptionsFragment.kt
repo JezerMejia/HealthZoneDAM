@@ -1,5 +1,6 @@
 package com.jezerm.healthzone.ui.patient
 
+import android.animation.Animator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.transition.MaterialFadeThrough
 import com.jezerm.healthzone.MainActivity
 import com.jezerm.healthzone.R
 import com.jezerm.healthzone.data.AppDatabase
@@ -53,6 +55,10 @@ class PrescriptionsFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
         }
+        val transition = MaterialFadeThrough()
+        enterTransition = transition
+        exitTransition = transition
+
         val db = AppDatabase.getInstance(requireContext())
         prescriptionDao = db.prescriptionDao()
 

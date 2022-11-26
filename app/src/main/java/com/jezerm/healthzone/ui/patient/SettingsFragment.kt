@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.*
 import androidx.fragment.app.Fragment
+import com.google.android.material.transition.MaterialFadeThrough
 import com.jezerm.healthzone.R
 import com.jezerm.healthzone.databinding.FragmentSettingsBinding
 
@@ -17,6 +18,10 @@ class SettingsFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
         }
+
+        val transition = MaterialFadeThrough()
+        enterTransition = transition
+        exitTransition = transition
     }
 
     override fun onCreateView(
