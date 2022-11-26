@@ -9,6 +9,8 @@ import kotlinx.parcelize.Parcelize
 class Prescription(
     @PrimaryKey(autoGenerate = true) val id: Int,
     @ColumnInfo(name = "subject") var subject: String,
+    @ColumnInfo(name = "details") var details: String,
+    @ColumnInfo(name = "completed") var completed: Boolean = false,
     @ColumnInfo(name = "patient_id") var patientId: Long?,
     @ColumnInfo(name = "doctor_id") var doctorId: Long?,
 ) : Parcelable

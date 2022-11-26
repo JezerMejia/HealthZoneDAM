@@ -13,6 +13,10 @@ interface PrescriptionDAO {
     suspend fun getAll(): List<PrescriptionFull>
 
     @Transaction
+    @Query("SELECT * FROM Prescription WHERE completed = 1")
+    suspend fun getAllCompleted(): List<PrescriptionFull>
+
+    @Transaction
     @Query("SELECT * FROM Prescription WHERE patient_id = :patientId")
     suspend fun getPrescriptionsOfPatient(patientId: Int): List<PrescriptionFull>
 
@@ -20,6 +24,36 @@ interface PrescriptionDAO {
         return getPrescriptionsOfPatient(patient.id)
     }
 
-    @Query("INSERT INTO Prescription (subject, patient_id, doctor_id) VALUES (:subject, :patientId, :doctorId)")
-    suspend fun insertPrescription(subject: String, patientId: Long?, doctorId: Long?)
+    @Transaction
+    @Query("SELECT * FROM Prescription WHERE patient_id = :patientId AND completed = 1")
+    suspend fun getCompletedPrescriptionsOfPatient(patientId: Int): List<PrescriptionFull>
+
+    suspend fun getCompletedPrescriptionsOfPatient(patient: User): List<PrescriptionFull> {
+        return getCompletedPrescriptionsOfPatient(patient.id)
+    }
+
+    @Query(
+        "INSERT INTO Prescription " +
+                "(subject, details, completed, patient_id, doctor_id) VALUES " +
+                "(:subject, :details, :completed, :patientId, :doctorId)"
+    )
+    suspend fun insertPrescription(
+        subject: String,
+        details: String,
+        completed: Boolean = false,
+        patientId: Long?,
+        doctorId: Long?
+    )
+
+    @Query(
+        "INSERT INTO Prescription " +
+                "(subject, details, completed, patient_id, doctor_id) VALUES " +
+                "(:subject, :details, 0, :patientId, :doctorId)"
+    )
+    suspend fun insertPrescription(
+        subject: String,
+        details: String,
+        patientId: Long?,
+        doctorId: Long?
+    )
 }
