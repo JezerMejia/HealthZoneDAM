@@ -2,17 +2,26 @@ package com.jezerm.healthzone.data
 
 import androidx.room.*
 import com.jezerm.healthzone.entities.User
+import com.jezerm.healthzone.entities.UserWithPrescription
 
 @Dao
 interface UserDAO {
     @Query("SELECT * FROM User")
     suspend fun getAll(): List<User>
 
+    @Transaction
+    @Query("SELECT * FROM User")
+    suspend fun getAllWithPrescriptions(): List<UserWithPrescription>
+
     @Query("SELECT * FROM User WHERE is_doctor = 'true'")
     suspend fun getAllDoctors(): List<User>
 
     @Query("SELECT * FROM User WHERE is_doctor = 'false'")
     suspend fun getAllPatients(): List<User>
+
+    @Transaction
+    @Query("SELECT * FROM User WHERE is_doctor = 'false'")
+    suspend fun getAllPatientsWithPrescriptions(): List<UserWithPrescription>
 
 //    @Query("SELECT * FROM Appointment WHERE id_doctor = :id")
 //    suspend fun getDoctorsAppointments(): List<Appointment>
@@ -46,6 +55,10 @@ interface UserDAO {
     @Query("SELECT * FROM User WHERE id = :id LIMIT 1")
     suspend fun getUserById(id: Int): List<User>
 
+    @Transaction
+    @Query("SELECT * FROM User WHERE id = :id LIMIT 1")
+    suspend fun getUserWithPrescriptionById(id: Int): List<UserWithPrescription>
+
     @Query(
         "SELECT DISTINCT Patient.* FROM User as Doctor " +
                 "INNER JOIN Appointment ON doctor_id = Doctor.id " +
@@ -53,6 +66,15 @@ interface UserDAO {
                 "WHERE Doctor.id = :doctorId"
     )
     suspend fun getDoctorsPatients(doctorId: Int): List<User>
+
+    @Transaction
+    @Query(
+        "SELECT DISTINCT Patient.* FROM User as Doctor " +
+                "INNER JOIN Appointment ON doctor_id = Doctor.id " +
+                "INNER JOIN User as Patient ON Patient.id = Appointment.patient_id " +
+                "WHERE Doctor.id = :doctorId"
+    )
+    suspend fun getDoctorsPatientsWithPrescription(doctorId: Int): List<UserWithPrescription>
 
     @Query(
         "INSERT INTO User" +
