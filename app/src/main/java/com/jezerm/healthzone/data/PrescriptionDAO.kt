@@ -1,8 +1,10 @@
 package com.jezerm.healthzone.data
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Query
 import androidx.room.Transaction
+import com.jezerm.healthzone.entities.Prescription
 import com.jezerm.healthzone.entities.PrescriptionFull
 import com.jezerm.healthzone.entities.User
 
@@ -17,7 +19,7 @@ interface PrescriptionDAO {
     suspend fun getAllCompleted(): List<PrescriptionFull>
 
     @Transaction
-    @Query("SELECT * FROM Prescription WHERE patient_id = :patientId")
+    @Query("SELECT * FROM Prescription WHERE patient_id = :patientId AND completed = 0")
     suspend fun getPrescriptionsOfPatient(patientId: Int): List<PrescriptionFull>
 
     suspend fun getPrescriptionsOfPatient(patient: User): List<PrescriptionFull> {
@@ -56,4 +58,10 @@ interface PrescriptionDAO {
         patientId: Long?,
         doctorId: Long?
     )
+
+    @Query("UPDATE Prescription SET completed = :completed WHERE id = :id")
+    suspend fun completePrescription(id: Int, completed: Boolean)
+
+    @Delete
+    suspend fun delete(prescription: Prescription)
 }
