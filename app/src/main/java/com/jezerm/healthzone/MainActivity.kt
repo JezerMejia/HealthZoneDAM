@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_home,
-                R.id.navigation_appointments,
+                R.id.navigation_prescriptions,
                 R.id.navigation_maps,
                 R.id.navigation_settings
             )

@@ -109,6 +109,7 @@
     <string name="action_show_more">Ver más</string>
     <string name="action_delete">Eliminar</string>
     <string name="action_complete">Completar</string>
+    <string name="action_prescriptions">Recetas</string>
     <string-array name="sex">
         <item>@string/sex_male</item>
         <item>@string/sex_female</item>
