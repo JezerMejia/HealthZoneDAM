@@ -5,9 +5,9 @@
         android:icon="@drawable/ic_round_home_24"
         android:title="@string/action_home" />
     <item
-        android:id="@+id/navigation_appointments"
-        android:icon="@drawable/ic_round_meeting_room_24"
-        android:title="@string/action_appointments" />
+        android:id="@+id/navigation_prescriptions"
+        android:icon="@drawable/ic_round_medication_24"
+        android:title="@string/action_prescriptions" />
     <item
         android:id="@+id/navigation_maps"
         android:icon="@drawable/ic_round_map_24"

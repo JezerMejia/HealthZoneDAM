@@ -19,7 +19,9 @@
             android:id="@+id/action_appointments_to_details"
             app:destination="@id/navigation_appointment_details"
             app:enterAnim="@anim/slide_in"
-            app:exitAnim="@anim/fade_out" />
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
     </fragment>
     <fragment
         android:id="@+id/navigation_maps"
@@ -40,4 +42,26 @@
         android:name="com.jezerm.healthzone.ui.patient.SettingsFragment"
         android:label="Ajustes"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/navigation_prescriptions"
+        android:name="com.jezerm.healthzone.ui.patient.PrescriptionsFragment"
+        android:label="@string/title_prescriptions"
+        tools:layout="@layout/fragment_prescriptions">
+        <action
+            android:id="@+id/action_prescriptions_to_prescription_details"
+            app:destination="@id/navigation_prescription_details"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_prescription_details"
+        android:name="com.jezerm.healthzone.ui.patient.prescription.PrescriptionDetailsFragment"
+        android:label="@string/title_prescription_details"
+        tools:layout="@layout/fragment_prescription_details">
+        <argument
+            android:name="prescription_full"
+            app:argType="com.jezerm.healthzone.entities.PrescriptionFull" />
+    </fragment>
 </navigation>

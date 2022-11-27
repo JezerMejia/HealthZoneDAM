@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_login"
+    app:startDestination="@id/navigation_login">
+
+    <fragment
+        android:id="@+id/navigation_register_user"
+        android:name="com.jezerm.healthzone.ui.register.RegisterUserFragment"
+        android:label="fragment_register_user"
+        tools:layout="@layout/fragment_register_user">
+        <action
+            android:id="@+id/action_register_user_to_register_doctor"
+            app:destination="@id/navigation_register_doctor"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
+        <action
+            android:id="@+id/action_register_user_to_register_patient"
+            app:destination="@id/navigation_register_patient"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
+        <argument
+            android:name="doctor_form"
+            app:argType="boolean" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_register_doctor"
+        android:name="com.jezerm.healthzone.ui.register.RegisterMedicoFragment"
+        android:label="fragment_register_medico"
+        tools:layout="@layout/fragment_register_medico">
+        <argument
+            android:name="user"
+            app:argType="com.jezerm.healthzone.entities.User" />
+        <action
+            android:id="@+id/action_register_doctor_to_login"
+            app:destination="@id/navigation_login"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_out"
+            app:popUpTo="@id/navigation_login"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_login"
+        android:name="com.jezerm.healthzone.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_login_to_register_user"
+            app:destination="@id/navigation_register_user"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_register_patient"
+        android:name="com.jezerm.healthzone.ui.register.RegisterPatientFragment"
+        android:label="fragment_register_patient"
+        tools:layout="@layout/fragment_register_patient">
+        <argument
+            android:name="user"
+            app:argType="com.jezerm.healthzone.entities.User" />
+        <action
+            android:id="@+id/action_register_patient_to_login"
+            app:destination="@id/navigation_login"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_out"
+            app:popUpTo="@id/navigation_login"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>
