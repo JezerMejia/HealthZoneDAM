@@ -1,14 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.patient.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Paciente" />
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="8dp"
+            android:padding="8dp"
+            android:textAppearance="?attr/textAppearanceTitleMedium"
+            tools:text="Calendario de citas" />
+
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="24dp"
+            app:mcv_calendarMode="month"
+            app:mcv_dateTextAppearance="@style/CustomTextAppearance"
+            app:mcv_selectionColor="?attr/colorSecondary"
+            app:mcv_leftArrow="@drawable/ic_round_keyboard_arrow_left_24"
+            app:mcv_rightArrow="@drawable/ic_round_keyboard_arrow_right_24"
+            app:mcv_selectionMode="single"
+            app:mcv_showOtherDates="none"
+            app:mcv_weekDayTextAppearance="?attr/textAppearanceLabelSmall" />
+    </LinearLayout>
+
 
 </FrameLayout>
