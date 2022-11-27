@@ -1,5 +1,6 @@
 package com.jezerm.healthzone.ui.patient
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import com.google.android.material.transition.MaterialFadeThrough
 import com.jezerm.healthzone.MainActivity
 import com.jezerm.healthzone.R
 import com.jezerm.healthzone.databinding.FragmentHomePatientBinding
+import com.jezerm.healthzone.ui.patient.Buttoms_nav_menu.Appoitment_add
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomePatientBinding
@@ -32,17 +34,23 @@ class HomeFragment : Fragment() {
     }
 
     override fun onStart() {
+        super.onStart()
         MainActivity.fabPrimaryIcon = R.drawable.ic_round_add_24
         MainActivity.fabPrimaryText = R.string.action_add_appointment
         MainActivity.fabPrimary.show()
 
-        MainActivity.fabPrimary.setOnClickListener {
+        /*MainActivity.fabPrimary.setOnClickListener {
             val dialog = AddAppointmentDialog {
                 println("Submit!")
             }
             dialog.show(parentFragmentManager, "addButton")
-        }
+        }*/
+        MainActivity.fabPrimary.setOnClickListener{
+            Appoitment_add(onSubmitClicklistener = {
 
-        super.onStart()
+                /*Toast.makeText(this,"SEXOOOOOOOO", Toast.LENGTH_SHORT).show()*/
+            }
+            ).show(parentFragmentManager,"Test")
+        }
     }
 }
