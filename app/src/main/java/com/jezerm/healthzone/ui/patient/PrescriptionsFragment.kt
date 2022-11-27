@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.transition.MaterialFadeThrough
 import com.jezerm.healthzone.MainActivity
@@ -91,6 +93,25 @@ class PrescriptionsFragment : Fragment() {
         }
 
         showUncompleted()
+
+        binding.rcvPrescriptionList.addOnScrollListener(object : OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE
+                    && !MainActivity.fabPrimary.isExtended
+                    && recyclerView.computeVerticalScrollOffset() == 0
+                ) {
+                    MainActivity.fabPrimary.extend()
+                }
+                super.onScrollStateChanged(recyclerView, newState)
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (dy != 0 && MainActivity.fabPrimary.isExtended) {
+                    MainActivity.fabPrimary.shrink()
+                }
+                super.onScrolled(recyclerView, dx, dy)
+            }
+        })
     }
 
     private fun removeItem(prescription: Prescription, position: Int) {
