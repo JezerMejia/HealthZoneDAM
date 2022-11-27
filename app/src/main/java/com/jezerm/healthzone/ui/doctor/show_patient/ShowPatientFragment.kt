@@ -2,6 +2,9 @@ package com.jezerm.healthzone.ui.doctor.show_patient
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -10,8 +13,6 @@ import com.google.android.material.tabs.TabLayout
 import com.jezerm.healthzone.R
 import com.jezerm.healthzone.databinding.FragmentShowPatientBinding
 import com.jezerm.healthzone.entities.User
-import com.jezerm.healthzone.ui.patient.AccountFragments.FirstFragment
-import com.jezerm.healthzone.ui.patient.AccountFragments.SecondFragment
 
 
 class ShowPatientFragment : Fragment() {
@@ -31,25 +32,41 @@ class ShowPatientFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentShowPatientBinding.inflate(inflater, container, false)
-        initData()
         start()
-        setHasOptionsMenu(true)
-        binding.toolbar.inflateMenu(R.menu.menu_empty)
-        binding.toolbar.title = patient.fullName
+        setToolbar()
         return binding.root
     }
 
-    private fun initData() {
-//        binding.tvName.text = patient.fullName
+    override fun onDestroyView() {
+        super.onDestroyView()
+    }
+
+    private fun setToolbar() {
+        binding.toolbar.title = patient.fullName
+        (activity as AppCompatActivity?)!!.supportActionBar?.hide()
+        (activity as AppCompatActivity?)!!.setSupportActionBar(binding.toolbar)
+        (activity as AppCompatActivity?)!!.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        super.onResume()
+    }
+
+    override fun onPause() {
+        val toolbar: Toolbar = (activity as AppCompatActivity?)!!.findViewById(R.id.toolbar)
+        (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
+        (activity as AppCompatActivity?)!!.supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        toolbar.title = "Inicio"
+        (activity as AppCompatActivity?)!!.supportActionBar?.show()
+//        Toast.makeText(requireContext(), toolbar.toString(), Toast.LENGTH_SHORT).show()
+        super.onPause()
     }
 
     private fun start() {
         val adapter = TabsFragmentAdapter(
-            requireActivity().supportFragmentManager,
+            childFragmentManager,
             FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
         )
-        adapter.addItem(FirstFragment(), "Detalles")
-        adapter.addItem(SecondFragment(), "Citas")
+        adapter.addItem(PatientDetailsFragment(), "Detalles")
+        adapter.addItem(PatientAppointmentsFragment(), "Citas")
+        Toast.makeText(requireContext(), adapter.count.toString(), Toast.LENGTH_SHORT).show()
 
         val viewPager: ViewPager = binding.viewPager
         viewPager.adapter = adapter
@@ -61,8 +78,8 @@ class ShowPatientFragment : Fragment() {
     class TabsFragmentAdapter(fm: FragmentManager, behavior: Int) :
         FragmentPagerAdapter(fm, behavior) {
 
-        private val listaFragment: MutableList<Fragment> = ArrayList()
-        private val titleList: MutableList<String> = ArrayList()
+        private val listaFragment: ArrayList<Fragment> = ArrayList()
+        private val titleList: ArrayList<String> = ArrayList()
 
         fun addItem(fragment: Fragment, titulo: String) {
             listaFragment.add(fragment)
