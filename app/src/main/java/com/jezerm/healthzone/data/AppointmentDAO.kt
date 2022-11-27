@@ -11,6 +11,9 @@ interface AppointmentDAO {
     @Query("SELECT * FROM Appointment")
     suspend fun getAll(): List<Appointment>
 
+    @Query("SELECT * FROM Appointment WHERE doctor_id=:doctorId AND patient_id=:patientId")
+    suspend fun getByDoctorAndPatient(doctorId: Int, patientId: Int): List<Appointment>
+
     @Query("INSERT INTO Appointment" +
             "(date, description, doctor_id, patient_id) VALUES" +
             "('2022-11-25 19:00 America/Managua', 'aaaaaa', 2, 1)")

@@ -7,14 +7,15 @@
     tools:context=".ui.doctor.show_patient.PatientAppointmentsFragment"
     >
 
-    <TextView
-        android:id="@+id/tvPacientes"
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvAppointments"
+        android:padding="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Citas"
-        android:textSize="30sp"
-        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/patient_appointment_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
