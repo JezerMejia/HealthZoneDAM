@@ -9,7 +9,9 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.WindowCompat
+import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
@@ -17,6 +19,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.jezerm.healthzone.data.AppDatabase
 import com.jezerm.healthzone.databinding.ActivityMainBinding
 import com.jezerm.healthzone.entities.User
@@ -28,7 +31,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-    private var requiresFab = true
+    private var requiresFab = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         appContext = applicationContext
@@ -57,6 +60,8 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        fabPrimary = binding.fabPrimary
+
         setSupportActionBar(binding.toolbar)
 
         if (user.isDoctor) {
@@ -65,16 +70,23 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
             setupPatientView()
         }
 
-        binding.fabPrimary.addOnHideAnimationListener(object : AnimatorListener {
-            override fun onAnimationStart(p0: Animator) {}
-            override fun onAnimationEnd(p0: Animator) {
-                if (!requiresFab) return
-                binding.fabPrimary.show()
+        binding.fabPrimary.addOnShowAnimationListener(object : AnimatorListener {
+            override fun onAnimationStart(p0: Animator) {
+                binding.fabPrimary.extend()
+                setFabPrimaryData()
             }
 
+            override fun onAnimationEnd(p0: Animator) {}
             override fun onAnimationCancel(p0: Animator) {}
             override fun onAnimationRepeat(p0: Animator) {}
         })
+        setFabPrimaryData()
+    }
+
+    private fun setFabPrimaryData() {
+        val drawable = ResourcesCompat.getDrawable(resources, fabPrimaryIcon, null)
+        binding.fabPrimary.icon = drawable
+        binding.fabPrimary.text = resources.getString(fabPrimaryText)
     }
 
     private suspend fun getSavedUser(): User? {
@@ -158,6 +170,9 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
     companion object {
         lateinit var appContext: Context
         lateinit var user: User
+        lateinit var fabPrimary: ExtendedFloatingActionButton
+        var fabPrimaryIcon: Int = R.drawable.ic_round_add_24
+        var fabPrimaryText: Int = R.string.action_add_appointment
     }
 
     override fun onDestinationChanged(
@@ -168,11 +183,10 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         requiresFab = destination.id in setOf(
             R.id.navigation_home,
             R.id.navigation_prescriptions,
-            R.id.navigation_settings,
         )
-        if (requiresFab)
-            binding.fabPrimary.show()
-        binding.fabPrimary.hide()
-        binding.fabPrimary.visibility = View.VISIBLE
+        if (binding.fabPrimary.isVisible) {
+            binding.fabPrimary.hide()
+            binding.fabPrimary.visibility = View.VISIBLE
+        }
     }
 }
