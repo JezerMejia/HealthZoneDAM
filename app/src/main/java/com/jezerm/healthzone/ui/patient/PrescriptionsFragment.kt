@@ -1,6 +1,5 @@
 package com.jezerm.healthzone.ui.patient
 
-import android.animation.Animator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -57,7 +56,6 @@ class PrescriptionsFragment : Fragment() {
         }
         val transition = MaterialFadeThrough()
         enterTransition = transition
-        exitTransition = transition
 
         val db = AppDatabase.getInstance(requireContext())
         prescriptionDao = db.prescriptionDao()
