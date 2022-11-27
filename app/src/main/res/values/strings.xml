@@ -9,8 +9,20 @@
     <string name="action_appointments">Citas</string>
     <string name="action_prescriptions">Recetas</string>
     <string name="action_logout">Cerrar sesión</string>
+
+    <!-- General actions -->
+    <string name="action_accept">Aceptar</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="action_delete">Eliminar</string>
+    <string name="action_show_more">Ver más</string>
+    <string name="action_continue">Continuar</string>
+    <string name="action_back">Atrás</string>
+
     <string name="action_complete">Completar</string>
     <string name="action_uncomplete">Descompletar</string>
+    <string name="action_add_appointment">Añadir cita</string>
+    <string name="action_add_prescription">Añadir receta</string>
+    <string name="action_add_medicine">Añadir medicina</string>
 
     <!-- Title strings -->
     <string name="title_activity_login">Login</string>
@@ -68,7 +80,6 @@
     <string name="prompt_password">Contraseña</string>
     <string name="action_sign_in">Iniciar sesión</string>
     <string name="action_register">Registrarse</string>
-    <string name="action_cancel">Cancelar</string>
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
@@ -89,11 +100,8 @@
     <string name="prompt_first_name">Primer nombre</string>
     <string name="prompt_lastname">Apellidos</string>
     <string name="prompt_middle_name">Segundo nombre</string>
-    <string name="action_continue">Continuar</string>
-    <string name="action_back">Atrás</string>
     <string name="register_succeeded">Registro completado</string>
     <string name="register_succeeded_message">Su usuario fue registrado con éxito.</string>
-    <string name="action_accept">Aceptar</string>
     <string name="prompt_age">Edad</string>
     <string name="prompt_weight">Peso (kg)</string>
     <string name="prompt_height">Altura (cm)</string>
@@ -118,8 +126,6 @@
 
     <string name="sex_male">Hombre</string>
     <string name="sex_female">Mujer</string>
-    <string name="action_show_more">Ver más</string>
-    <string name="action_delete">Eliminar</string>
     <string name="title_prescription_details">Detalles de la receta</string>
     <string-array name="sex">
         <item>@string/sex_male</item>
