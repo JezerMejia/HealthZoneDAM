@@ -6,22 +6,21 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Gravity
-import android.view.LayoutInflater
 import androidx.fragment.app.DialogFragment
-import com.jezerm.healthzone.databinding.AddButtomBinding
+import com.jezerm.healthzone.databinding.AddAppointmentDialogBinding
 
-class Addbuttom(
+class AddAppointmentDialog(
     private val onSubmitClicklistener: () -> Unit
-): DialogFragment() {
+) : DialogFragment() {
 
-    private lateinit var binding : AddButtomBinding
+    private lateinit var binding: AddAppointmentDialogBinding
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        binding = AddButtomBinding.inflate(LayoutInflater.from(context))
+        binding = AddAppointmentDialogBinding.inflate(layoutInflater)
         val builder = AlertDialog.Builder(requireActivity())
         builder.setView(binding.root)
 
-        binding.bAddQuantity.setOnClickListener(){
+        binding.bAddQuantity.setOnClickListener {
             onSubmitClicklistener.invoke()
         }
 
