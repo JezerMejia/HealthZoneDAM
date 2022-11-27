@@ -52,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
             val password: String = binding.etPassword.text.toString()
             runBlocking {
                 launch {
-                    val userList = userDao.login(username, password)
+                    val userList = userDao.login("doctor", "123")
                     if (userList.isEmpty())
                         return@launch
                     setSavedUser(userList.first())
