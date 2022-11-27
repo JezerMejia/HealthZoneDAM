@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.WindowCompat
@@ -24,6 +25,7 @@ import com.jezerm.healthzone.data.AppDatabase
 import com.jezerm.healthzone.databinding.ActivityMainBinding
 import com.jezerm.healthzone.entities.User
 import com.jezerm.healthzone.ui.patient.AccountActivity
+import com.jezerm.healthzone.ui.patient.Buttoms_nav_menu.Appoitment_buttom
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
@@ -53,6 +55,13 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
                 user = savedUser
                 init()
             }
+        }
+
+        binding.fabPrimary.setOnClickListener{
+            Appoitment_buttom(onSubmitClicklistener = {
+                Toast.makeText(this,"SEXOOOOOOOO", Toast.LENGTH_SHORT).show()
+            }
+            ).show(supportFragmentManager,"Test")
         }
     }
 
