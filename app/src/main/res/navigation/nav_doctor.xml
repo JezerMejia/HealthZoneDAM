@@ -22,5 +22,17 @@
         <argument
             android:name="patient"
             app:argType="com.jezerm.healthzone.entities.User" />
+        <action
+            android:id="@+id/appointmentDetailsFragment"
+            app:destination="@id/appointmentDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/appointmentDetailsFragment"
+        android:name="com.jezerm.healthzone.ui.patient.appointment.AppointmentDetailsFragment"
+        android:label="fragment_appointment_details"
+        tools:layout="@layout/fragment_appointment_details" >
+        <argument
+            android:name="appointment"
+            app:argType="com.jezerm.healthzone.entities.Appointment" />
     </fragment>
 </navigation>

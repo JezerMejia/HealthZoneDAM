@@ -8,12 +8,14 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jezerm.healthzone.MainActivity
+import com.jezerm.healthzone.R
 import com.jezerm.healthzone.data.AppDatabase
 import com.jezerm.healthzone.databinding.FragmentShowPatientAppointmentsBinding
 import com.jezerm.healthzone.entities.Appointment
 import com.jezerm.healthzone.entities.User
 import com.jezerm.healthzone.ui.doctor.HomeFragmentDirections
 import com.jezerm.healthzone.ui.doctor.PatientAdapter
+import com.jezerm.healthzone.ui.patient.AppointmentsFragmentDirections
 import com.jezerm.healthzone.ui.patient.appointment.AppointmentAdapter
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -50,10 +52,11 @@ class PatientAppointmentsFragment : Fragment() {
 
     private fun initData() {
         binding.rcvAppointments.layoutManager = LinearLayoutManager(requireContext())
-        binding.rcvAppointments.adapter = AppointmentAdapter(appointments as ArrayList<Appointment>)
-//        binding.rcvAppointments.adapter = AppointmentAdapter(appointments) { appointment, i ->
-//            val action = HomeFragmentDirections.actionHomeToShowPatient(appointment)
-//            findNavController().navigate(action)
-//        }
+        binding.rcvAppointments.adapter = AppointmentAdapter(appointments as ArrayList<Appointment>) {
+
+            val action = ShowPatientFragmentDirections.appointmentDetailsFragment(it)
+            val fragment = requireParentFragment()
+            fragment.findNavController().navigate(action)
+        }
     }
 }
