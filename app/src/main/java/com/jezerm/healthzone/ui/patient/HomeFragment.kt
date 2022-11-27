@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.transition.MaterialFadeThrough
+import com.jezerm.healthzone.MainActivity
+import com.jezerm.healthzone.R
 import com.jezerm.healthzone.databinding.FragmentHomePatientBinding
 
 class HomeFragment : Fragment() {
@@ -19,7 +21,6 @@ class HomeFragment : Fragment() {
 
         val transition = MaterialFadeThrough()
         enterTransition = transition
-        exitTransition = transition
     }
 
     override fun onCreateView(
@@ -28,5 +29,17 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = FragmentHomePatientBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onStart() {
+        MainActivity.fabPrimaryIcon = R.drawable.ic_round_add_24
+        MainActivity.fabPrimaryText = R.string.action_add_appointment
+        MainActivity.fabPrimary.show()
+
+        super.onStart()
     }
 }

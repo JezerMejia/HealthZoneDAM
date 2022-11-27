@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.jezerm.healthzone.MainActivity
+import com.jezerm.healthzone.R
 import com.jezerm.healthzone.data.AppDatabase
 import com.jezerm.healthzone.data.PrescriptionDAO
 import com.jezerm.healthzone.databinding.FragmentPrescriptionDetailsBinding
@@ -50,5 +52,13 @@ class PrescriptionDetailsFragment : Fragment() {
                 binding.rcvMedicineList.adapter = MedicineAdapter(ArrayList(medicineList))
             }
         }
+    }
+
+    override fun onStart() {
+        MainActivity.fabPrimaryIcon = R.drawable.ic_round_add_24
+        MainActivity.fabPrimaryText = R.string.action_add_medicine
+        MainActivity.fabPrimary.show()
+
+        super.onStart()
     }
 }

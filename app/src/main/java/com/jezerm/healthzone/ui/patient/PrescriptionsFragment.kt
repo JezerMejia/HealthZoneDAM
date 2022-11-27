@@ -153,4 +153,12 @@ class PrescriptionsFragment : Fragment() {
 
         binding.rcvPrescriptionList.adapter = adapter
     }
+
+    override fun onStart() {
+        MainActivity.fabPrimaryIcon = R.drawable.ic_round_home_24
+        MainActivity.fabPrimaryText = R.string.action_add_prescription
+        MainActivity.fabPrimary.show()
+
+        super.onStart()
+    }
 }
