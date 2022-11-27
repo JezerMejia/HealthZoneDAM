@@ -17,6 +17,7 @@
     <string name="action_show_more">Ver más</string>
     <string name="action_continue">Continuar</string>
     <string name="action_back">Atrás</string>
+    <string name="action_ok">Ok</string>
 
     <string name="action_complete">Completar</string>
     <string name="action_uncomplete">Descompletar</string>
@@ -123,6 +124,11 @@
         <item>@string/options_light</item>
         <item>@string/options_automatic</item>
     </string-array>
+
+    <!-- Location -->
+    <string name="location_permission_denied">No se permitió obtener la localización</string>
+    <string name="permission_required_toast">Se requiere activar la localización</string>
+    <string name="permission_rationale_location">HealthZone requiere de los permisos de localización para poder encontrar los centros médicos más cercanos a ti. Esto lo hacemos para mejorar su experiencia.</string>
 
     <string name="sex_male">Hombre</string>
     <string name="sex_female">Mujer</string>
