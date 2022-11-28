@@ -10,15 +10,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.transition.MaterialFadeThrough
 import com.jezerm.healthzone.MainActivity
 import com.jezerm.healthzone.R
+import com.jezerm.healthzone.data.AppDatabase
+import com.jezerm.healthzone.data.AppointmentDAO
 import com.jezerm.healthzone.databinding.FragmentHomePatientBinding
 import com.jezerm.healthzone.entities.Appointment
 import com.jezerm.healthzone.ui.patient.appointment.AppointmentAdapter
 import com.jezerm.healthzone.ui.patient.home.HomeHeaderAdapter
 import com.jezerm.healthzone.ui.patient.home.HomeNoDataAdapter
-import com.jezerm.healthzone.utils.DateTime
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomePatientBinding
+    private lateinit var appointmentDao: AppointmentDAO
+    private var appointmentList = arrayListOf<Appointment>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +33,16 @@ class HomeFragment : Fragment() {
 
         val transition = MaterialFadeThrough()
         enterTransition = transition
+
+        val db = AppDatabase.getInstance(requireContext())
+        appointmentDao = db.appointmentDao()
+
+        runBlocking {
+            launch {
+                appointmentList =
+                    ArrayList(appointmentDao.getAppointmentsOfPatient(MainActivity.user))
+            }
+        }
     }
 
     override fun onCreateView(
@@ -41,34 +56,13 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val appointments = arrayListOf<Appointment>(
-            Appointment(
-                1,
-                DateTime.now().plusHours(1),
-                "Armando",
-                0,
-                0
-            ),
-            Appointment(
-                1,
-                DateTime.now().plusHours(2),
-                "Armando",
-                0,
-                0
-            ),
-            Appointment(
-                1,
-                DateTime.now().plusHours(3),
-                "Armando",
-                0,
-                0
-            ),
-        )
-
+        val headerAdapter = HomeHeaderAdapter(appointmentList) { widget, date, selected ->
+            println("YEAH!!!!")
+        }
         val adapter = ConcatAdapter(
-            HomeHeaderAdapter(),
-            AppointmentAdapter(appointments),
-            HomeNoDataAdapter(appointments as ArrayList<Any>)
+            headerAdapter,
+            AppointmentAdapter(appointmentList),
+            HomeNoDataAdapter(appointmentList as ArrayList<Any>)
         )
 
         binding.rcvAppointmentList.layoutManager = LinearLayoutManager(requireContext())
