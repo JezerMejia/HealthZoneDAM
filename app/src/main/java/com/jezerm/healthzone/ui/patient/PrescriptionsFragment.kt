@@ -94,24 +94,7 @@ class PrescriptionsFragment : Fragment() {
 
         showUncompleted()
 
-        binding.rcvPrescriptionList.addOnScrollListener(object : OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                if (newState == RecyclerView.SCROLL_STATE_IDLE
-                    && !MainActivity.fabPrimary.isExtended
-                    && recyclerView.computeVerticalScrollOffset() == 0
-                ) {
-                    MainActivity.fabPrimary.extend()
-                }
-                super.onScrollStateChanged(recyclerView, newState)
-            }
-
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                if (dy != 0 && MainActivity.fabPrimary.isExtended) {
-                    MainActivity.fabPrimary.shrink()
-                }
-                super.onScrolled(recyclerView, dx, dy)
-            }
-        })
+        binding.rcvPrescriptionList.addOnScrollListener(MainActivity.onRecyclerViewScrollListener)
     }
 
     private fun removeItem(prescription: Prescription, position: Int) {

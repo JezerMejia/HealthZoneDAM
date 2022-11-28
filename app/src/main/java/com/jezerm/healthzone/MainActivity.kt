@@ -19,6 +19,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.jezerm.healthzone.data.AppDatabase
 import com.jezerm.healthzone.databinding.ActivityMainBinding
@@ -173,6 +175,25 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         lateinit var fabPrimary: ExtendedFloatingActionButton
         var fabPrimaryIcon: Int = R.drawable.ic_round_add_24
         var fabPrimaryText: Int = R.string.action_add_appointment
+
+        val onRecyclerViewScrollListener = object : OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE
+                    && !fabPrimary.isExtended
+                    && recyclerView.computeVerticalScrollOffset() == 0
+                ) {
+                    fabPrimary.extend()
+                }
+                super.onScrollStateChanged(recyclerView, newState)
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (dy != 0 && fabPrimary.isExtended) {
+                    fabPrimary.shrink()
+                }
+                super.onScrolled(recyclerView, dx, dy)
+            }
+        }
     }
 
     override fun onDestinationChanged(
