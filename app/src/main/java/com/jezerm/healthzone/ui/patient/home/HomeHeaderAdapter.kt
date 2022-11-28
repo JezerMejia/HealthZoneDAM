@@ -1,6 +1,5 @@
 package com.jezerm.healthzone.ui.patient.home
 
-import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,11 +7,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.jezerm.healthzone.MainActivity
 import com.jezerm.healthzone.databinding.HomePatientHeaderBinding
 import com.prolificinteractive.materialcalendarview.CalendarDay
-
-val Int.dp: Int
-    get() = (this / Resources.getSystem().displayMetrics.density).toInt()
-val Int.px: Int
-    get() = (this * Resources.getSystem().displayMetrics.density).toInt()
 
 class HomeHeaderAdapter : RecyclerView.Adapter<HomeHeaderAdapter.HeaderHolder>() {
 

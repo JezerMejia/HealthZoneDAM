@@ -14,6 +14,7 @@ import com.jezerm.healthzone.databinding.FragmentHomePatientBinding
 import com.jezerm.healthzone.entities.Appointment
 import com.jezerm.healthzone.ui.patient.appointment.AppointmentAdapter
 import com.jezerm.healthzone.ui.patient.home.HomeHeaderAdapter
+import com.jezerm.healthzone.ui.patient.home.HomeNoDataAdapter
 import com.jezerm.healthzone.utils.DateTime
 
 class HomeFragment : Fragment() {
@@ -40,32 +41,34 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val appointments = arrayListOf<Appointment>(
+            Appointment(
+                1,
+                DateTime.now().plusHours(1),
+                "Armando",
+                0,
+                0
+            ),
+            Appointment(
+                1,
+                DateTime.now().plusHours(2),
+                "Armando",
+                0,
+                0
+            ),
+            Appointment(
+                1,
+                DateTime.now().plusHours(3),
+                "Armando",
+                0,
+                0
+            ),
+        )
+
         val adapter = ConcatAdapter(
-            HomeHeaderAdapter(), AppointmentAdapter(
-                arrayListOf(
-                    Appointment(
-                        1,
-                        DateTime.now().plusHours(1),
-                        "Armando",
-                        0,
-                        0
-                    ),
-                    Appointment(
-                        1,
-                        DateTime.now().plusHours(2),
-                        "Armando",
-                        0,
-                        0
-                    ),
-                    Appointment(
-                        1,
-                        DateTime.now().plusHours(3),
-                        "Armando",
-                        0,
-                        0
-                    ),
-                )
-            )
+            HomeHeaderAdapter(),
+            AppointmentAdapter(appointments),
+            HomeNoDataAdapter(appointments as ArrayList<Any>)
         )
 
         binding.rcvAppointmentList.layoutManager = LinearLayoutManager(requireContext())
