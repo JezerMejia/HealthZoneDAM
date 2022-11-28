@@ -16,7 +16,7 @@ import kotlinx.coroutines.runBlocking
 
 
 class HomeFragment : Fragment() {
-    private lateinit var binding: FragmentHomeDoctorBinding
+    public lateinit var binding: FragmentHomeDoctorBinding
     private lateinit var doctor: User
     private lateinit var patients: List<User>
     override fun onCreate(savedInstanceState: Bundle?) {

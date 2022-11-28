@@ -1,17 +1,15 @@
-package com.jezerm.healthzone.ui.doctor
+package com.jezerm.healthzone.ui.doctor.show_patient
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.jezerm.healthzone.databinding.FragmentShowPatientBinding
+import com.jezerm.healthzone.databinding.FragmentShowPatientDetailsBinding
 import com.jezerm.healthzone.entities.User
 
-
-class ShowPatientFragment : Fragment() {
-
-    private lateinit var binding: FragmentShowPatientBinding
+class PatientDetailsFragment : Fragment() {
+    private lateinit var binding: FragmentShowPatientDetailsBinding
     private lateinit var patient: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,12 +23,17 @@ class ShowPatientFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentShowPatientBinding.inflate(inflater, container, false)
+
+        binding = FragmentShowPatientDetailsBinding.inflate(inflater, container, false)
         initData()
         return binding.root
     }
 
     private fun initData() {
-        binding.tvName.text = patient.fullName
+        binding.tvAge.text = "${patient.age} años"
+        binding.tvHeight.text = "${patient.height} cm"
+        binding.tvWeight.text = "${patient.weight} lbs"
+        binding.tvSex.text = if (patient.sex!!) "Masculino" else "Femenino"
+        binding.tvConditions.text = patient.conditions.toString()
     }
 }

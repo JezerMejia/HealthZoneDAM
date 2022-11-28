@@ -16,11 +16,42 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_show_patient"
-        android:name="com.jezerm.healthzone.ui.doctor.ShowPatientFragment"
+        android:name="com.jezerm.healthzone.ui.doctor.show_patient.ShowPatientFragment"
         android:label="fragment_show_patient"
         tools:layout="@layout/fragment_show_patient" >
         <argument
             android:name="patient"
             app:argType="com.jezerm.healthzone.entities.User" />
+        <action
+            android:id="@+id/appointmentDetailsFragment"
+            app:destination="@id/appointmentDetailsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/appointmentDetailsFragment"
+        android:name="com.jezerm.healthzone.ui.patient.appointment.AppointmentDetailsFragment"
+        android:label="@string/action_appointments"
+        tools:layout="@layout/fragment_appointment_details" >
+        <argument
+            android:name="appointment"
+            app:argType="com.jezerm.healthzone.entities.Appointment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_maps"
+        android:name="com.jezerm.healthzone.ui.patient.MapsFragment"
+        android:label="@string/action_map"
+        tools:layout="@layout/fragment_maps_patient" />
+    <fragment
+        android:id="@+id/navigation_appointments"
+        android:name="com.jezerm.healthzone.ui.patient.AppointmentsFragment"
+        android:label="@string/action_appointments"
+        tools:layout="@layout/fragment_appointments_patient" >
+        <action
+            android:id="@+id/action_appointments_to_details"
+            app:destination="@id/appointmentDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.jezerm.healthzone.ui.patient.SettingsFragment"
+        android:label="@string/action_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>
