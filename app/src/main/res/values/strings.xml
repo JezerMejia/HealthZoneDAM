@@ -31,6 +31,7 @@
     <string name="title_register_patient">Registrar paciente</string>
     <string name="title_prescriptions">Recetas médicas</string>
     <string name="title_delete_prescription_dialog">Eliminar receta médica</string>
+    <string name="title_add_appointment">Agendar una cita</string>
 
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

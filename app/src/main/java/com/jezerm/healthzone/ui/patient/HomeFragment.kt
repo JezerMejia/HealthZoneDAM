@@ -31,14 +31,17 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
     override fun onStart() {
         MainActivity.fabPrimaryIcon = R.drawable.ic_round_add_24
         MainActivity.fabPrimaryText = R.string.action_add_appointment
         MainActivity.fabPrimary.show()
+
+        MainActivity.fabPrimary.setOnClickListener {
+            val dialog = AddAppointmentDialog {
+                println("Submit!")
+            }
+            dialog.show(parentFragmentManager, "addButton")
+        }
 
         super.onStart()
     }
