@@ -118,6 +118,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.bottomNavigation.setupWithNavController(navController)
+        binding.bottomNavigation.inflateMenu(R.menu.menu_user)
         navController.addOnDestinationChangedListener(this)
     }
 
@@ -130,10 +131,14 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
                 R.id.navigation_home,
                 R.id.navigation_appointments,
                 R.id.navigation_maps,
+                R.id.navigation_settings
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.bottomNavigation.setupWithNavController(navController)
+        binding.bottomNavigation.inflateMenu(R.menu.menu_doctor)
+        navController.addOnDestinationChangedListener(this)
+
     }
 
     private fun openAccountView(): Boolean {

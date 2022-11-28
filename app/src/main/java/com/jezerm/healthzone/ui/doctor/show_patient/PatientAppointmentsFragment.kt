@@ -52,7 +52,7 @@ class PatientAppointmentsFragment : Fragment() {
 
     private fun initData() {
         binding.rcvAppointments.layoutManager = LinearLayoutManager(requireContext())
-        binding.rcvAppointments.adapter = AppointmentAdapter(appointments as ArrayList<Appointment>) {
+        binding.rcvAppointments.adapter = AppointmentAdapter(appointments) {
 
             val action = ShowPatientFragmentDirections.appointmentDetailsFragment(it)
             val fragment = requireParentFragment()

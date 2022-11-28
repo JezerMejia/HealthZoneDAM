@@ -8,7 +8,7 @@ import com.jezerm.healthzone.entities.Appointment
 import com.jezerm.healthzone.utils.DateTime
 
 class AppointmentAdapter(
-    var list: ArrayList<Appointment>,
+    var list: List<Appointment>,
     private val clickListener: (Appointment) -> Unit = { }
 ) : RecyclerView.Adapter<AppointmentAdapter.AppointmentHolder>() {
 
