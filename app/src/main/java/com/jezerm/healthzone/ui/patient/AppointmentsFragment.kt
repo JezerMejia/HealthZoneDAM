@@ -39,7 +39,12 @@ class AppointmentsFragment : Fragment() {
 
         runBlocking {
             launch {
-                val list = appointmentDao.getAppointmentsOfPatient(MainActivity.user)
+                val user = MainActivity.user
+
+                val list =
+                    if (user.isDoctor) appointmentDao.getAppointmentsOfDoctor(user)
+                    else appointmentDao.getAppointmentsOfPatient(user)
+
                 appointmentList = if (date != null)
                     ArrayList(list.filter {
                         it.date.toLocalDate().isEqual(date?.toLocalDate())

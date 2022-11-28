@@ -29,4 +29,11 @@ interface AppointmentDAO {
     suspend fun getAppointmentsOfDoctor(doctor: User): List<Appointment> {
         return getAppointmentsOfDoctor(doctor.id)
     }
+
+    @Query("SELECT * FROM Appointment WHERE patient_id = :patientId AND doctor_id = :doctorId")
+    suspend fun getAppointmentsOfPatientAndDoctor(patientId: Int, doctorId: Int): List<Appointment>
+
+    suspend fun getAppointmentsOfPatientAndDoctor(patient: User, doctor: User): List<Appointment> {
+        return getAppointmentsOfPatientAndDoctor(patient.id, doctor.id)
+    }
 }
