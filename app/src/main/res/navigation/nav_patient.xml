@@ -9,12 +9,20 @@
         android:id="@+id/navigation_home"
         android:name="com.jezerm.healthzone.ui.patient.HomeFragment"
         android:label="@string/action_home"
-        tools:layout="@layout/fragment_home_patient" />
+        tools:layout="@layout/fragment_home_patient">
+        <action
+            android:id="@+id/action_home_to_appointments"
+            app:destination="@id/navigation_appointments"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_appointments"
         android:name="com.jezerm.healthzone.ui.patient.AppointmentsFragment"
         android:label="@string/action_appointments"
-        tools:layout="@layout/fragment_appointments_patient" >
+        tools:layout="@layout/fragment_appointments_patient">
         <action
             android:id="@+id/action_appointments_to_details"
             app:destination="@id/navigation_appointment_details"
@@ -22,6 +30,10 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_out" />
+        <argument
+            android:name="date"
+            app:argType="long"
+            android:defaultValue="-1L" />
     </fragment>
     <fragment
         android:id="@+id/navigation_maps"
