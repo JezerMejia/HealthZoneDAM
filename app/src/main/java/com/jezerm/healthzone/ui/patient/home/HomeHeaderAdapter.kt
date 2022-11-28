@@ -3,37 +3,30 @@ package com.jezerm.healthzone.ui.patient.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
-import com.jezerm.healthzone.MainActivity
 import com.jezerm.healthzone.databinding.HomePatientHeaderBinding
+import com.jezerm.healthzone.entities.Appointment
 import com.prolificinteractive.materialcalendarview.CalendarDay
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener
 
-class HomeHeaderAdapter : RecyclerView.Adapter<HomeHeaderAdapter.HeaderHolder>() {
+class HomeHeaderAdapter(var list: ArrayList<Appointment>, var listener: OnDateSelectedListener) :
+    RecyclerView.Adapter<HomeHeaderAdapter.HeaderHolder>() {
 
     inner class HeaderHolder(private val binding: HomePatientHeaderBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun load() {
-            binding.calendarView.addDecorator(
-                EventDecorator(
-                    arrayListOf(
-                        CalendarDay.today(),
-                        CalendarDay.from(2022, 11, 28),
-                        CalendarDay.from(2022, 11, 30),
-                        CalendarDay.from(2022, 11, 15),
-                    )
+            val calendarList: ArrayList<CalendarDay> = ArrayList(list.map {
+                CalendarDay.from(
+                    it.date.year,
+                    it.date.monthValue,
+                    it.date.dayOfMonth
                 )
-            )
+            })
+            binding.calendarView.addDecorator(EventDecorator(calendarList))
             binding.calendarView.addDecorator(
                 OneDayDecorator()
             )
             binding.calendarView.setOnDateChangedListener { widget, date, selected ->
-                Snackbar.make(
-                    binding.calendarView,
-                    "${date.year}-${date.month}-${date.day}",
-                    Snackbar.LENGTH_SHORT
-                )
-                    .setAnchorView(MainActivity.fabPrimary)
-                    .show()
+                listener.onDateSelected(widget, date, selected)
             }
         }
     }
