@@ -32,6 +32,8 @@
     <string name="title_prescriptions">Recetas médicas</string>
     <string name="title_delete_prescription_dialog">Eliminar receta médica</string>
     <string name="title_add_appointment">Agendar una cita</string>
+    <string name="title_next_appointments">Citas próximas</string>
+    <string name="title_calendar_appointment">Calendario de citas</string>
 
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -114,6 +116,9 @@
     <string name="delete_prescription_message">¿Estás seguro/a de eliminar esta receta médica? Esto no se puede deshacer.</string>
     <string name="chip_completed">Completados</string>
 
+    <!-- Appointments -->
+    <string name="no_appointments_description">No hay citas próximas</string>
+
     <!--Settings-->
     <string name="settings">Test</string>
     <string name="options_dark">Oscuro</string>
@@ -128,7 +133,6 @@
     <string name="sex_male">Hombre</string>
     <string name="sex_female">Mujer</string>
     <string name="title_prescription_details">Detalles de la receta</string>
-    <string name="title_calendar_appointment">Calendario de citas</string>
     <string-array name="sex">
         <item>@string/sex_male</item>
         <item>@string/sex_female</item>
