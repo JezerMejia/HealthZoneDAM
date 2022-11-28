@@ -15,11 +15,7 @@ class HomeHeaderAdapter(var list: ArrayList<Appointment>, var listener: OnDateSe
         RecyclerView.ViewHolder(binding.root) {
         fun load() {
             val calendarList: ArrayList<CalendarDay> = ArrayList(list.map {
-                CalendarDay.from(
-                    it.date.year,
-                    it.date.monthValue,
-                    it.date.dayOfMonth
-                )
+                CalendarDay.from(it.date.year, it.date.monthValue, it.date.dayOfMonth)
             })
             binding.calendarView.addDecorator(EventDecorator(calendarList))
             binding.calendarView.addDecorator(

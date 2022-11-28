@@ -7,23 +7,51 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.jezerm.healthzone.MainActivity
+import com.jezerm.healthzone.data.AppDatabase
+import com.jezerm.healthzone.data.AppointmentDAO
 import com.jezerm.healthzone.databinding.FragmentAppointmentsPatientBinding
 import com.jezerm.healthzone.entities.Appointment
 import com.jezerm.healthzone.ui.patient.appointment.AppointmentAdapter
-import com.jezerm.healthzone.utils.DateTime
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import java.time.Instant
+import java.time.ZoneId
+import java.time.ZonedDateTime
 
 class AppointmentsFragment : Fragment() {
     private lateinit var binding: FragmentAppointmentsPatientBinding
+    private var date: ZonedDateTime? = null
+    private lateinit var appointmentDao: AppointmentDAO
+    private var appointmentList = arrayListOf<Appointment>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
+            val dateLong = it.getLong("date")
+            val i: Instant = Instant.ofEpochSecond(dateLong)
+            date = ZonedDateTime.ofInstant(i, ZoneId.systemDefault())
+            println("Date: $date")
+        }
+
+        val db = AppDatabase.getInstance(requireContext())
+        appointmentDao = db.appointmentDao()
+
+        runBlocking {
+            launch {
+                val list = appointmentDao.getAppointmentsOfPatient(MainActivity.user)
+                appointmentList = if (date != null)
+                    ArrayList(list.filter {
+                        it.date.toLocalDate().isEqual(date?.toLocalDate())
+                    })
+                else
+                    ArrayList(list)
+            }
         }
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = FragmentAppointmentsPatientBinding.inflate(inflater, container, false)
         return binding.root
@@ -31,37 +59,6 @@ class AppointmentsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val appointmentList = arrayListOf<Appointment>(
-            Appointment(
-                1,
-                DateTime.now().plusHours(1),
-                "Armando",
-                0,
-                0
-            ),
-            Appointment(
-                2,
-                DateTime.now().plusMinutes(2),
-                "Armando",
-                0,
-                0
-            ),
-            Appointment(
-                3,
-                DateTime.format("2022-11-22 13:00 America/Managua"),
-                "Armando",
-                0,
-                0
-            ),
-            Appointment(
-                4,
-                DateTime.format("2022-05-25 13:00 -06:00"),
-                "Juan",
-                0,
-                0,
-            ),
-        )
 
         binding.rcvAppointmentList.layoutManager = LinearLayoutManager(requireContext())
         binding.rcvAppointmentList.adapter = AppointmentAdapter(appointmentList) {
