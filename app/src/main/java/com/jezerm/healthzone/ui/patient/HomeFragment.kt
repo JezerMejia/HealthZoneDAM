@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.transition.MaterialFadeThrough
@@ -19,6 +20,8 @@ import com.jezerm.healthzone.ui.patient.home.HomeHeaderAdapter
 import com.jezerm.healthzone.ui.patient.home.HomeNoDataAdapter
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.time.ZoneId
+import java.time.ZonedDateTime
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomePatientBinding
@@ -57,12 +60,27 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val headerAdapter = HomeHeaderAdapter(appointmentList) { widget, date, selected ->
-            println("YEAH!!!!")
+            val zonedDateTime =
+                ZonedDateTime.of(
+                    date.year, date.month, date.day, 0, 0, 0, 0, ZoneId.systemDefault()
+                )
+            appointmentList.find {
+                it.date.toLocalDate().isEqual(zonedDateTime.toLocalDate())
+            } ?: return@HomeHeaderAdapter
+
+            val action = HomeFragmentDirections.actionHomeToAppointments(
+                zonedDateTime.toEpochSecond()
+            )
+            findNavController().navigate(action)
         }
+
+        val nextAppointmentList = ArrayList(appointmentList.filter {
+            it.date.isAfter(ZonedDateTime.now().minusHours(1))
+        })
         val adapter = ConcatAdapter(
             headerAdapter,
-            AppointmentAdapter(appointmentList),
-            HomeNoDataAdapter(appointmentList as ArrayList<Any>)
+            AppointmentAdapter(nextAppointmentList),
+            HomeNoDataAdapter(nextAppointmentList as ArrayList<Any>)
         )
 
         binding.rcvAppointmentList.layoutManager = LinearLayoutManager(requireContext())
