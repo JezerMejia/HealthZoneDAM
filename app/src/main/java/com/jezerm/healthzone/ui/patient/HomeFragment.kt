@@ -4,15 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.ConcatAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.transition.MaterialFadeThrough
 import com.jezerm.healthzone.MainActivity
 import com.jezerm.healthzone.R
 import com.jezerm.healthzone.databinding.FragmentHomePatientBinding
-import com.jezerm.healthzone.ui.patient.home.EventDecorator
-import com.jezerm.healthzone.ui.patient.home.OneDayDecorator
-import com.prolificinteractive.materialcalendarview.CalendarDay
+import com.jezerm.healthzone.entities.Appointment
+import com.jezerm.healthzone.ui.patient.appointment.AppointmentAdapter
+import com.jezerm.healthzone.ui.patient.home.HomeHeaderAdapter
+import com.jezerm.healthzone.utils.DateTime
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomePatientBinding
@@ -38,26 +40,37 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.calendarView.addDecorator(
-            EventDecorator(
+        val adapter = ConcatAdapter(
+            HomeHeaderAdapter(), AppointmentAdapter(
                 arrayListOf(
-                    CalendarDay.today(),
-                    CalendarDay.from(2022, 11, 28),
-                    CalendarDay.from(2022, 11, 30),
-                    CalendarDay.from(2022, 11, 15),
+                    Appointment(
+                        1,
+                        DateTime.now().plusHours(1),
+                        "Armando",
+                        0,
+                        0
+                    ),
+                    Appointment(
+                        1,
+                        DateTime.now().plusHours(2),
+                        "Armando",
+                        0,
+                        0
+                    ),
+                    Appointment(
+                        1,
+                        DateTime.now().plusHours(3),
+                        "Armando",
+                        0,
+                        0
+                    ),
                 )
             )
         )
-        binding.calendarView.addDecorator(
-            OneDayDecorator()
-        )
-        binding.calendarView.setOnDateChangedListener { widget, date, selected ->
-            Toast.makeText(
-                requireContext(),
-                "${date.year}-${date.month}-${date.day}",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
+
+        binding.rcvAppointmentList.layoutManager = LinearLayoutManager(requireContext())
+        binding.rcvAppointmentList.adapter = adapter
+        binding.rcvAppointmentList.addOnScrollListener(MainActivity.onRecyclerViewScrollListener)
     }
 
     override fun onStart() {

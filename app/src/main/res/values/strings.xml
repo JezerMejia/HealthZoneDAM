@@ -128,6 +128,7 @@
     <string name="sex_male">Hombre</string>
     <string name="sex_female">Mujer</string>
     <string name="title_prescription_details">Detalles de la receta</string>
+    <string name="title_calendar_appointment">Calendario de citas</string>
     <string-array name="sex">
         <item>@string/sex_male</item>
         <item>@string/sex_female</item>
