@@ -1,6 +1,5 @@
 package com.jezerm.healthzone.ui.patient
 
-import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -46,11 +45,8 @@ class HomeFragment : Fragment() {
             dialog.show(parentFragmentManager, "addButton")
         }*/
         MainActivity.fabPrimary.setOnClickListener{
-            Appoitment_add(onSubmitClicklistener = {
+                AddButtonFrag.display(parentFragmentManager)
 
-                /*Toast.makeText(this,"SEXOOOOOOOO", Toast.LENGTH_SHORT).show()*/
-            }
-            ).show(parentFragmentManager,"Test")
         }
     }
 }
