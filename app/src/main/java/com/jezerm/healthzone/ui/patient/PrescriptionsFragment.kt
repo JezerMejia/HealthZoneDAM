@@ -159,11 +159,13 @@ class PrescriptionsFragment : Fragment() {
     }
 
     override fun onStart() {
+        super.onStart()
         MainActivity.fabPrimaryIcon = R.drawable.ic_round_home_24
         MainActivity.fabPrimaryText = R.string.action_add_prescription
         MainActivity.fabPrimary.show()
-        MainActivity.fabPrimary.setOnClickListener { }
+        MainActivity.fabPrimary.setOnClickListener{
+            AddprescriptionFrag.display(parentFragmentManager)
 
-        super.onStart()
+        }
     }
 }

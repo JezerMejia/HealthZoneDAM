@@ -93,11 +93,8 @@ class HomeFragment : Fragment() {
         MainActivity.fabPrimaryText = R.string.action_add_appointment
         MainActivity.fabPrimary.show()
 
-        MainActivity.fabPrimary.setOnClickListener {
-            val dialog = AddAppointmentDialog {
-                println("Submit!")
-            }
-            dialog.show(parentFragmentManager, "addButton")
+        MainActivity.fabPrimary.setOnClickListener{
+                AddButtonFrag.display(parentFragmentManager)
         }
 
         super.onStart()
